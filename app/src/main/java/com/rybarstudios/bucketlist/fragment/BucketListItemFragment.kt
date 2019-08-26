@@ -1,5 +1,18 @@
 package com.rybarstudios.bucketlist.fragment
 
+import android.content.Context
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.ListFragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.rybarstudios.bucketlist.R
+import com.rybarstudios.bucketlist.adapter.MyBucketListItemRecyclerViewAdapter
+import com.rybarstudios.bucketlist.model.BucketItem
+
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -14,11 +27,11 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  *
  */
-class ListFragment : Fragment() {
+class BucketListItemFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var movieListListener: OnListFragmentInteractionListener? = null
+    private var bucketItemListListener: OnBucketItemListFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +47,7 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list, container, false)
+        return inflater.inflate(R.layout.fragment_bucketlistitem_list, container, false)
     }
 
     /**
@@ -50,17 +63,17 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        list_fragment.setHasFixedSize(true)
+        bucket_item_list.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        list_fragment.layoutManager = layoutManager
-        val movieListAdapter = MovieListAdapter(MovieItemList.movieList, movieListListener)
-        list_fragment.adapter = movieListAdapter
+        bucket_item_list.layoutManager = layoutManager
+        val movieListAdapter = MyBucketListItemRecyclerViewAdapter(BucketItem.bucketItemList, bucketItemListListener)
+        bucket_item_list.adapter = movieListAdapter
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnListFragmentInteractionListener) {
-            movieListListener = context
+        if (context is OnBucketItemListFragmentInteractionListener) {
+            bucketItemListListener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnShoppingListFragmentInteractionListener")
         }
@@ -68,7 +81,7 @@ class ListFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        movieListListener = null
+        bucketItemListListener = null
     }
 
     /**
@@ -82,8 +95,8 @@ class ListFragment : Fragment() {
      * (http://developer.android.com/training/basics/fragments/communicating.html)
      * for more information.
      */
-    interface OnListFragmentInteractionListener {
-        fun onListFragmentInteraction(item: MovieItem)
+    interface OnBucketItemListFragmentInteractionListener {
+        fun onBucketItemListFragmentInteraction(item: BucketItem)
     }
 
     companion object {

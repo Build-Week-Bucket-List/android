@@ -1,14 +1,15 @@
 package com.rybarstudios.bucketlist.fragment
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import com.rybarstudios.bucketlist.R
+import com.rybarstudios.bucketlist.model.BucketItem
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -48,13 +49,13 @@ class AddButtonFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btn_add_movie.setOnClickListener {
-            Toast.makeText(context, "Add a movie", Toast.LENGTH_SHORT).show()
-            listener?.onButtonFragmentInteraction(MovieItem("", 0, -1, false))
+        btn_add_item.setOnClickListener {
+            //Toast.makeText(context, "Add", Toast.LENGTH_SHORT).show()
+            listener?.onButtonFragmentInteraction(BucketItem("", "", false, 0))
         }
     }
 
-    fun onButtonPressed(item: MovieItem) {
+    fun onButtonPressed(item: BucketItem) {
         listener?.onButtonFragmentInteraction(item)
     }
 
@@ -84,7 +85,7 @@ class AddButtonFragment : Fragment() {
      * for more information.
      */
     interface OnButtonFragmentInteractionListener {
-        fun onButtonFragmentInteraction(item: MovieItem)
+        fun onButtonFragmentInteraction(item: BucketItem)
     }
 
     companion object {

@@ -3,19 +3,23 @@ package com.rybarstudios.bucketlist.activity
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.ListFragment
+import com.rybarstudios.bucketlist.R
+import com.rybarstudios.bucketlist.fragment.AddButtonFragment
+import com.rybarstudios.bucketlist.fragment.BucketListItemFragment
+import com.rybarstudios.bucketlist.model.BucketItem
 
-class FragmentActivity : AppCompatActivity(),
+class BucketListActivity : AppCompatActivity(),
     AddButtonFragment.OnButtonFragmentInteractionListener,
-    ListFragment.OnListFragmentInteractionListener,
-    RatingsFragment.OnRatingsFragmentInteractionListener {
+    BucketListItemFragment.OnBucketItemListFragmentInteractionListener {
 
     companion object {
         const val FRAGMENT_KEY = "P98AINSDKFIUH09O12U3FIUH"
         lateinit var context: Context
     }
 
-    override fun onButtonFragmentInteraction(item: MovieItem) {
-        val buttonFragment = RatingsFragment()
+    override fun onButtonFragmentInteraction(item: BucketItem) {
+        /*val buttonFragment = RatingsFragment()
 
         val bundle = Bundle()
         bundle.putSerializable(FRAGMENT_KEY, item)
@@ -24,10 +28,10 @@ class FragmentActivity : AppCompatActivity(),
         supportFragmentManager.beginTransaction()
             .replace(R.id.ratings_fragment_holder, buttonFragment)
             .addToBackStack(null)
-            .commit()
+            .commit()*/
     }
 
-    override fun onRatingsFragmentInteraction(item: MovieItem) {
+    /*override fun onRatingsFragmentInteraction(item: MovieItem) {
         if (item.movieName == "" && item.changedBoolean) {
             // Delete the item
             // Refactor movieList to update all movieIndexPos values
@@ -41,10 +45,10 @@ class FragmentActivity : AppCompatActivity(),
             movieList.add(item)
             list_fragment.adapter?.notifyItemInserted(item.movieIndexPos)
         }
-    }
+    }*/
 
-    override fun onListFragmentInteraction(item: MovieItem) {
-        val listFragment = RatingsFragment()
+    override fun onBucketItemListFragmentInteraction(item: BucketItem) {
+        /*val listFragment = RatingsFragment()
 
         val bundle = Bundle()
         bundle.putSerializable(FRAGMENT_KEY, item)
@@ -53,32 +57,12 @@ class FragmentActivity : AppCompatActivity(),
         supportFragmentManager.beginTransaction()
             .replace(R.id.ratings_fragment_holder, listFragment)
             .addToBackStack(null)
-            .commit()
+            .commit()*/
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_fragment)
-
-        movieList.add(MovieItem("a;ldjsbg;pajknsd", 3, 0, false))
-        movieList.add(MovieItem("a;ldjsbg;pajknsd", 4, 1, false))
-        movieList.add(MovieItem("a;ldjsbg;pajknsd", 5, 2, false))
-        movieList.add(MovieItem("a;ldjsbg;pajknsd", 2, 3, false))
-        movieList.add(MovieItem("a;ldjsbg;pajknsd", 1, 4, false))
-        movieList.add(MovieItem("a;ldjsbg;pajknsd", 5, 5, false))
-        movieList.add(MovieItem("a;ldjsbg;pajknsd", 4, 6, false))
-        movieList.add(MovieItem("a;ldjsbg;pajknsd", 1, 7, false))
-        movieList.add(MovieItem("a;ldjsbg;pajknsd", 2, 8, false))
-        movieList.add(MovieItem("a;ldjsbg;pajknsd", 3, 9, false))
-        movieList.add(MovieItem("a;ldjsbg;pajknsd", 4, 10, false))
-        movieList.add(MovieItem("a;ldjsbg;pajknsd", 5, 11, false))
-        movieList.add(MovieItem("a;ldjsbg;pajknsd", 1, 12, false))
-        movieList.add(MovieItem("a;ldjsbg;pajknsd", 2, 13, false))
-        movieList.add(MovieItem("a;ldjsbg;pajknsd", 5, 14, false))
-        movieList.add(MovieItem("a;ldjsbg;pajknsd", 3, 15, false))
-        movieList.add(MovieItem("a;ldjsbg;pajknsd", 1, 16, false))
-        movieList.add(MovieItem("a;ldjsbg;pajknsd", 2, 17, false))
-        movieList.add(MovieItem("a;ldjsbg;pajknsd", 4, 18, false))
+        setContentView(R.layout.activity_bucket_list)
 
         val fragmentButton = AddButtonFragment()
         supportFragmentManager.beginTransaction()
@@ -87,10 +71,10 @@ class FragmentActivity : AppCompatActivity(),
 
         val fragmentList = ListFragment()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.list_fragment_holder, fragmentList)
+            .replace(R.id.bucket_item_list, fragmentList)
             .commit()
 
-        if (movieList.size == 0) {
+        /*if (movieList.size == 0) {
             val fragmentRating = RatingsFragment()
 
             val bundle = Bundle()
@@ -99,7 +83,7 @@ class FragmentActivity : AppCompatActivity(),
             supportFragmentManager.beginTransaction()
                 .replace(R.id.ratings_fragment_holder, fragmentRating)
                 .addToBackStack(null)
-                .commit()
+                .commit()*/
         }
     }
 }
