@@ -8,7 +8,7 @@ import android.widget.TextView
 import com.rybarstudios.bucketlist.R
 
 
-import com.rybarstudios.bucketlist.fragment.BucketListItemFragment.OnListFragmentInteractionListener
+import com.rybarstudios.bucketlist.activity.BucketListItemFragment.OnListFragmentInteractionListener
 import com.rybarstudios.bucketlist.fragment.dummy.DummyContent.DummyItem
 
 import kotlinx.android.synthetic.main.fragment_bucketlistitem.view.*

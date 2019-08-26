@@ -1,4 +1,4 @@
-package com.rybarstudios.bucketlist.fragment
+package com.rybarstudios.bucketlist.activity
 
 import android.content.Context
 import android.os.Bundle
