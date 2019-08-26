@@ -11,9 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.adapter.MyBucketListItemRecyclerViewAdapter
-
-import com.rybarstudios.bucketlist.fragment.dummy.DummyContent
-import com.rybarstudios.bucketlist.fragment.dummy.DummyContent.DummyItem
+import com.rybarstudios.bucketlist.model.BucketItem
 
 /**
  * A fragment representing a list of Items.
@@ -49,7 +47,7 @@ class BucketListItemFragment : Fragment() {
                     else -> GridLayoutManager(context, columnCount)
                 }
                 adapter = MyBucketListItemRecyclerViewAdapter(
-                    DummyContent.ITEMS,
+                    BucketItem.
                     listener
                 )
             }
