@@ -9,9 +9,11 @@ import com.rybarstudios.bucketlist.R
 
 
 import com.rybarstudios.bucketlist.activity.BucketListItemFragment.OnListFragmentInteractionListener
+import com.rybarstudios.bucketlist.fragment.ListFragment
 import com.rybarstudios.bucketlist.fragment.dummy.DummyContent.DummyItem
+import com.rybarstudios.bucketlist.model.BucketItem
 
-import kotlinx.android.synthetic.main.fragment_bucketlistitem.view.*
+import kotlinx.android.synthetic.main.bucket_list_item_layout.view.*
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
@@ -19,15 +21,15 @@ import kotlinx.android.synthetic.main.fragment_bucketlistitem.view.*
  * TODO: Replace the implementation with code for your data type.
  */
 class MyBucketListItemRecyclerViewAdapter(
-    private val mValues: List<DummyItem>,
-    private val mListener: OnListFragmentInteractionListener?
+    private val mValues: List<BucketItem>,
+    private val mListener: ListFragment.OnListFragmentInteractionListener?
 ) : RecyclerView.Adapter<MyBucketListItemRecyclerViewAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
 
     init {
         mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as DummyItem
+            val item = v.tag as BucketItem
             // Notify the active callbacks interface (the activity, if the fragment is attached to
             // one) that an item has been selected.
             mListener?.onListFragmentInteraction(item)
@@ -36,7 +38,7 @@ class MyBucketListItemRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_bucketlistitem, parent, false)
+            .inflate(R.layout.bucket_list_item_layout, parent, false)
         return ViewHolder(view)
     }
 

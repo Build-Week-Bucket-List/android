@@ -10,4 +10,4 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".activity.BucketListItemFragment"
-    tools:listitem="@layout/fragment_bucketlistitem" />
+    tools:listitem="@layout/bucket_list_item_layout" />
