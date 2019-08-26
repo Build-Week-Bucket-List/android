@@ -2,6 +2,7 @@ package com.rybarstudios.bucketlist.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.rybarstudios.bucketlist.R
 
 class DetailFragmentActivity : AppCompatActivity() {
 
