@@ -1,9 +1,10 @@
-package com.rybarstudios.bucketlist
+package com.rybarstudios.bucketlist.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.rybarstudios.bucketlist.R
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
