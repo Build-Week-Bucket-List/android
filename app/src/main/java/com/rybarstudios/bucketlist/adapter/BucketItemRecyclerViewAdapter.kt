@@ -1,5 +1,7 @@
 package com.rybarstudios.bucketlist.adapter
 
+import android.app.Activity
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -71,12 +73,16 @@ class BucketItemRecyclerViewAdapter(
             Toast.makeText(context, "${data[position].indexId}", Toast.LENGTH_SHORT).show()
 
             //Starts DetailFragmentActivity when bucketListItem is clicked -- TC
-            val detailIntent = Intent(context, DetailFragmentActivity::class.java)
 
             val bundle = Bundle()
             bundle.putSerializable(DETAIL_INTENT_KEY, data[position])
 
-            startActivity(context, detailIntent, bundle)
+            val detailIntent = Intent(context, DetailFragmentActivity::class.java)
+            detailIntent.putExtra("key", bundle)
+
+            (context as Activity).startActivity(detailIntent)
+
+
 
         }
 
