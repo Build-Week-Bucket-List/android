@@ -13,7 +13,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         cardview_login.setOnClickListener {
-            val intent = Intent(this, BucketListActivity::class.java)
+            val intent = Intent(this, BucketListFragmentActivity::class.java)
             startActivity(intent)
         }
     }

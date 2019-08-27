@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.BucketListActivity"></activity>
+        <activity
+            android:name=".activity.DetailFragmentActivity"
+            android:label="@string/title_activity_detail_fragment"></activity>
+        <activity android:name=".activity.BucketListFragmentActivity" />
         <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,7 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.DetailFragmentActivity" />
     </application>
 
 </manifest>
