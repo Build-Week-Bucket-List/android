@@ -3,6 +3,7 @@ package com.rybarstudios.bucketlist.adapter
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Animatable
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.DETAIL_INTENT_KEY
 import com.rybarstudios.bucketlist.activity.DetailFragmentActivity
@@ -66,15 +68,44 @@ class BucketItemRecyclerViewAdapter(
 
             //Starts DetailFragmentActivity when bucketListItem is clicked -- TC
 
-            val bundle = Bundle()
-            bundle.putSerializable(DETAIL_INTENT_KEY, data[position])
-
             val detailIntent = Intent(context, DetailFragmentActivity::class.java)
-            detailIntent.putExtra("key", bundle)
+            detailIntent.putExtra(DETAIL_INTENT_KEY, data[position])
 
             (context as Activity).startActivity(detailIntent)
 
+        }
 
+
+        //declaring avd images
+        val checkImage = ContextCompat.getDrawable(context, R.drawable.check)
+        val uncheckImage = ContextCompat.getDrawable(context, R.drawable.uncheck)
+
+
+        //setting drawable based on completed value
+        if (data[position].completed == false) {
+
+            holder.image.setImageDrawable(uncheckImage)
+
+        } else {
+            holder.image.setImageDrawable(checkImage)
+        }
+
+        //listener to change animation when clicked
+        holder.image.setOnClickListener {
+
+            if (data[position].completed == false){
+
+                data[position].completed = true
+                holder.image.setImageDrawable(checkImage)
+                (checkImage as Animatable).start()
+
+            } else {
+
+                data[position].completed = false
+                holder.image.setImageDrawable(uncheckImage)
+                (uncheckImage as Animatable).start()
+
+            }
 
         }
 

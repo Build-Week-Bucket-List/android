@@ -9,6 +9,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.rybarstudios.bucketlist.R
+import com.rybarstudios.bucketlist.fragment.PhotoGalleryDetailFragment
 
 class DetailFragmentActivity : AppCompatActivity() {
 
@@ -28,8 +29,8 @@ class DetailFragmentActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        val bottomNavigation: BottomNavigationView = findViewById(R.id.mobile_navigation)
-        bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        val bottomNavigation: BottomNavigationView? = findViewById(R.id.mobile_navigation)
+        bottomNavigation?.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
     }
 
@@ -42,6 +43,8 @@ class DetailFragmentActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_photo_gallery -> {
+                val photoGallery = PhotoGalleryDetailFragment()
+                openFragment(photoGallery)
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -50,7 +53,7 @@ class DetailFragmentActivity : AppCompatActivity() {
 
     private fun openFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.navigation_photo_gallery, fragment)  //Changing this line
+        transaction.replace(R.id.bottom_nav_container, fragment)  //Changing this line
         transaction.addToBackStack(null)
         transaction.commit()
     }

@@ -7,6 +7,8 @@ import com.rybarstudios.bucketlist.fragment.BucketItemAddButtonFragment
 import com.rybarstudios.bucketlist.fragment.BucketItemAddFragment
 import com.rybarstudios.bucketlist.fragment.BucketItemListFragment
 import com.rybarstudios.bucketlist.model.BucketItem
+import com.rybarstudios.bucketlist.model.BucketListItem
+import kotlinx.android.synthetic.main.fragment_bucket_item_list.*
 
 class BucketListFragmentActivity : AppCompatActivity(),
     BucketItemAddButtonFragment.OnBucketItemAddButtonFragmentInteractionListener,
@@ -19,16 +21,6 @@ class BucketListFragmentActivity : AppCompatActivity(),
     }
 
     override fun onBucketItemListFragmentInteraction(item: BucketItem) {
-        /*val listFragment = BucketListItemFragment()
-
-        val bundle = Bundle()
-        bundle.putSerializable(FRAGMENT_KEY, item)
-        listFragment.arguments = bundle
-
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.ratings_fragment_holder, listFragment)
-            .addToBackStack(null)
-            .commit()*/
     }
 
     override fun onBucketItemAddButtonFragmentInteraction(item: BucketItem) {
@@ -45,28 +37,30 @@ class BucketListFragmentActivity : AppCompatActivity(),
     }
 
     override fun onBucketItemAddFragmentInteraction(item: BucketItem) {
-
-        /*override fun onRatingsFragmentInteraction(item: MovieItem) {
-        if (item.movieName == "" && item.changedBoolean) {
-            // Delete the item
-            // Refactor movieList to update all movieIndexPos values
-        } else if (item.changedBoolean) {
-            // Item was modified
-            movieList[item.movieIndexPos] = item
-            list_fragment.adapter?.notifyItemChanged(item.movieIndexPos)
-        } else if (item.movieName != ""){
-            // New item added
-            item.movieIndexPos = movieList.size
-            movieList.add(item)
-            list_fragment.adapter?.notifyItemInserted(item.movieIndexPos)
-        }
-    }*/
+        item.indexId = BucketListItem.bucketListItem.size
+        BucketListItem.bucketListItem.add(item)
+        bucket_item_list.adapter?.notifyItemInserted(item.indexId)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bucket_list_fragment)
 
+        BucketListItem.bucketListItem.add(BucketItem("machu pichu", "visit machu pichu", ArrayList(), false, 0))
+        BucketListItem.bucketListItem.add(BucketItem("Marathon", "Run a full maraton", ArrayList(), false, 1))
+        BucketListItem.bucketListItem.add(BucketItem("Skydiving", "Do a high altitude skydive", ArrayList(), false, 2))
+        BucketListItem.bucketListItem.add(BucketItem("Giza Pyramids", "See the Great Pyramids of Giza", ArrayList(), false, 3))
+        BucketListItem.bucketListItem.add(BucketItem("Alligator", "Wrestle an alligator to establish dominance", ArrayList(), false, 4))
+        BucketListItem.bucketListItem.add(BucketItem("President", "Meet the President of the United States", ArrayList(), false, 5))
+        BucketListItem.bucketListItem.add(BucketItem("Mike Tyson", "Knock Out Mike Tyson IRL", ArrayList(), false, 6))
+        BucketListItem.bucketListItem.add(BucketItem("Go-Kart", "Hire a bunch of actors to dress up as mario characters and go go-karting", ArrayList(), false, 7))
+        BucketListItem.bucketListItem.add(BucketItem("RATM", "Rage Against The Machine with Rage Against The Machine", ArrayList(), false, 8))
+        BucketListItem.bucketListItem.add(BucketItem("7 Continents", "Travel to all 7 continents", ArrayList(), false, 9))
+        BucketListItem.bucketListItem.add(BucketItem("Appalachain Trail", "Hike the entire appalachain trail", ArrayList(), false, 10))
+        BucketListItem.bucketListItem.add(BucketItem("Tornado", "See a tornado", ArrayList(), false, 11))
+        BucketListItem.bucketListItem.add(BucketItem("Hurrican", "Fly into a hurricane with the NHS Hurrican Chasers", ArrayList(), false, 12))
+
+        // Inflate activity_bucket_list_fragment FrameLayout(s) with the fragments
         val fragmentButton = BucketItemAddButtonFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.btn_bucket_item_add_fragment_holder, fragmentButton)
