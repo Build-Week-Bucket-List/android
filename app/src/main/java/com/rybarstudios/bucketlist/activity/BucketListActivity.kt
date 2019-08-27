@@ -1,6 +1,7 @@
 package com.rybarstudios.bucketlist.activity
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.ListFragment
@@ -19,6 +20,8 @@ class BucketListActivity : AppCompatActivity(),
     }
 
     override fun onButtonFragmentInteraction(item: BucketItem) {
+        val intent = Intent(this, DetailFragmentActivity::class.java)
+        startActivity(intent)
         /*val buttonFragment = RatingsFragment()
 
         val bundle = Bundle()
