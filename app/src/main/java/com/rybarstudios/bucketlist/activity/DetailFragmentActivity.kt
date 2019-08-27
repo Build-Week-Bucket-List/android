@@ -1,5 +1,6 @@
 package com.rybarstudios.bucketlist.activity
 
+import android.net.Uri
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -9,53 +10,52 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.rybarstudios.bucketlist.R
+import com.rybarstudios.bucketlist.fragment.JournalItemDetailFragment
 import com.rybarstudios.bucketlist.fragment.PhotoGalleryDetailFragment
 
-class DetailFragmentActivity : AppCompatActivity() {
+class DetailFragmentActivity : AppCompatActivity(),
+    JournalItemDetailFragment.OnJournalItemFragmentInteractionListener,
+    PhotoGalleryDetailFragment.PhotoGalleryOnFragmentInteractionListener {
+
+
+    override fun onJournalItemFragmentInteraction(uri: Uri) {
+
+    }
+
+    override fun onPhotoGalleryFragmentInteraction(uri: Uri) {
+
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_fragment)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-        val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_journal_entry, R.id.navigation_home, R.id.navigation_photo_gallery
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
 
-        val bottomNavigation: BottomNavigationView? = findViewById(R.id.mobile_navigation)
+        val bottomNavigation: BottomNavigationView? = findViewById(R.id.nav_view)
         bottomNavigation?.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
+        var selectedFragment: Fragment? = null
         when (it.itemId) {
-            R.id.navigation_home -> {
-                return@OnNavigationItemSelectedListener true
+            R.id.navigation_combo_view -> {
+//                selectedFragment = TestFrag()
             }
-            R.id.navigation_journal_entry -> {
-                return@OnNavigationItemSelectedListener true
+            R.id.navigation_journal_entries -> {
+                selectedFragment = JournalItemDetailFragment()
             }
             R.id.navigation_photo_gallery -> {
-                val photoGallery = PhotoGalleryDetailFragment()
-                openFragment(photoGallery)
-                return@OnNavigationItemSelectedListener true
+                selectedFragment = PhotoGalleryDetailFragment()
             }
         }
-        false
-    }
-
-    private fun openFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.bottom_nav_container, fragment)  //Changing this line
-        transaction.addToBackStack(null)
-        transaction.commit()
+        selectedFragment?.let { it1 ->
+            supportFragmentManager.beginTransaction().replace(R.id.bottom_nav_container,
+                it1
+            ).commit()
+        }
+        true
     }
 
 }
