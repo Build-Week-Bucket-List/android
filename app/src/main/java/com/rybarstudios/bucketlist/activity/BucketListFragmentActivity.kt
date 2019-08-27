@@ -67,12 +67,12 @@ class BucketListFragmentActivity : AppCompatActivity(),
 
         val fragmentButton = BucketItemAddButtonFragment()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.btn_bucket_item_add_fragment, fragmentButton)
+            .replace(R.id.btn_bucket_item_add_fragment_holder, fragmentButton)
             .commit()
 
         val fragmentList = BucketListItemFragment()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.bucket_item_list_fragment, fragmentList)
+            .replace(R.id.bucket_item_list_fragment_holder, fragmentList)
             .commit()
 
         /*if (movieList.size == 0) {
