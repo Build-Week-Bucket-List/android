@@ -9,6 +9,7 @@ class BucketItem (
     var indexId: Int
 ) : Serializable
 
+/*
 bucketListItem[0].name = "Machu Pichu"
 bucketListItem[1].name = "Marathon"
 bucketListItem[2].name = "Skydiving"
@@ -69,4 +70,5 @@ bucketListItem[10].indexId = 10
 bucketListItem[11].indexId = 11
 bucketListItem[12].indexId = 12
 bucketListItem[13].indexId = 13
+*/
 
