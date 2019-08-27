@@ -48,7 +48,7 @@ class BucketListActivity : AppCompatActivity(),
     }*/
 
     override fun onBucketItemListFragmentInteraction(item: BucketItem) {
-        val listFragment = BucketListItemFragment()
+        /*val listFragment = BucketListItemFragment()
 
         val bundle = Bundle()
         bundle.putSerializable(FRAGMENT_KEY, item)
@@ -57,7 +57,7 @@ class BucketListActivity : AppCompatActivity(),
         supportFragmentManager.beginTransaction()
             .replace(R.id.ratings_fragment_holder, listFragment)
             .addToBackStack(null)
-            .commit()
+            .commit()*/
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
