@@ -66,15 +66,12 @@ class BucketItemRecyclerViewAdapter(
 
             //Starts DetailFragmentActivity when bucketListItem is clicked -- TC
 
-            val bundle = Bundle()
-            bundle.putSerializable(DETAIL_INTENT_KEY, data[position])
+            
 
             val detailIntent = Intent(context, DetailFragmentActivity::class.java)
-            detailIntent.putExtra("key", bundle)
+            detailIntent.putExtra(DETAIL_INTENT_KEY, data[position])
 
             (context as Activity).startActivity(detailIntent)
-
-
 
         }
 
