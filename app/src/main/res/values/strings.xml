@@ -8,7 +8,7 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="title_activity_detail_fragment">DetailFragmentActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Journal entries</string>
-    <string name="title_notifications">Photo gallery</string>
+    <string name="journal_entries">Journal entries</string>
+    <string name="combo_view">Combo view</string>
+    <string name="photo_gallery">Photo gallery</string>
 </resources>

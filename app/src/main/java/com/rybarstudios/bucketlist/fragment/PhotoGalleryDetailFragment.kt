@@ -33,7 +33,7 @@ class PhotoGalleryDetailFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
+    private var listener: PhotoGalleryOnFragmentInteractionListener? = null
 
     val imageList = mutableListOf<Uri>()
 
@@ -81,12 +81,12 @@ class PhotoGalleryDetailFragment : Fragment() {
 
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
+        listener?.onPhotoGalleryFragmentInteraction(uri)
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
+        if (context is PhotoGalleryOnFragmentInteractionListener) {
             listener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
@@ -109,9 +109,9 @@ class PhotoGalleryDetailFragment : Fragment() {
      * (http://developer.android.com/training/basics/fragments/communicating.html)
      * for more information.
      */
-    interface OnFragmentInteractionListener {
+    interface PhotoGalleryOnFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
+        fun onPhotoGalleryFragmentInteraction(uri: Uri)
     }
 
     companion object {
