@@ -65,6 +65,8 @@ class BucketListItemFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        BucketListItem.bucketListItem.add(BucketItem("machu pichu", "visit machu pichu", false, 0))
+
         bucket_item_list.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         bucket_item_list.layoutManager = layoutManager
