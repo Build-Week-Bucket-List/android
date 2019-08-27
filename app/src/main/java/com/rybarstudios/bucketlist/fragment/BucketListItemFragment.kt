@@ -10,11 +10,10 @@ import androidx.fragment.app.ListFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rybarstudios.bucketlist.R
-import com.rybarstudios.bucketlist.activity.BucketListActivity
-import com.rybarstudios.bucketlist.adapter.MyBucketListItemRecyclerViewAdapter
+import com.rybarstudios.bucketlist.adapter.BucketListItemRecyclerViewAdapter
 import com.rybarstudios.bucketlist.model.BucketItem
 import com.rybarstudios.bucketlist.model.BucketListItem
-import kotlinx.android.synthetic.main.fragment_bucketlistitem_list.*
+import kotlinx.android.synthetic.main.fragment_bucketlist_item_list.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -50,7 +49,7 @@ class BucketListItemFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bucketlistitem_list, container, false)
+        return inflater.inflate(R.layout.fragment_bucketlist_item_list, container, false)
     }
 
     /**
@@ -69,7 +68,7 @@ class BucketListItemFragment : Fragment() {
         bucket_item_list.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         bucket_item_list.layoutManager = layoutManager
-        val movieListAdapter = MyBucketListItemRecyclerViewAdapter(
+        val movieListAdapter = BucketListItemRecyclerViewAdapter(
             BucketListItem.bucketListItem,
             bucketItemListListener
         )

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/activity_fragment_frame"
-    tools:context=".activity.BucketListActivity">
+    tools:context=".activity.BucketListFragmentActivity">
 
     <FrameLayout
         android:id="@+id/list_fragment_holder"

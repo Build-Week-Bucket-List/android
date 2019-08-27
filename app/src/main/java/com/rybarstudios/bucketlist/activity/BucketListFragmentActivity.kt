@@ -3,14 +3,13 @@ package com.rybarstudios.bucketlist.activity
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.ListFragment
 import com.rybarstudios.bucketlist.R
-import com.rybarstudios.bucketlist.fragment.AddButtonFragment
+import com.rybarstudios.bucketlist.fragment.BlItemAddButtonFragment
 import com.rybarstudios.bucketlist.fragment.BucketListItemFragment
 import com.rybarstudios.bucketlist.model.BucketItem
 
-class BucketListActivity : AppCompatActivity(),
-    AddButtonFragment.OnButtonFragmentInteractionListener,
+class BucketListFragmentActivity : AppCompatActivity(),
+    BlItemAddButtonFragment.OnBlItemAddButtonFragmentInteractionListener,
     BucketListItemFragment.OnBucketItemListFragmentInteractionListener {
 
     companion object {
@@ -18,7 +17,7 @@ class BucketListActivity : AppCompatActivity(),
         lateinit var context: Context
     }
 
-    override fun onButtonFragmentInteraction(item: BucketItem) {
+    override fun onBlItemAddButtonFragmentInteraction(item: BucketItem) {
         /*val buttonFragment = RatingsFragment()
 
         val bundle = Bundle()
@@ -62,11 +61,11 @@ class BucketListActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bucket_list)
+        setContentView(R.layout.activity_bucketlist_fragment)
 
 
 
-        val fragmentButton = AddButtonFragment()
+        val fragmentButton = BlItemAddButtonFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.button_fragment_holder, fragmentButton)
             .commit()

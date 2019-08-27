@@ -12,12 +12,12 @@ import androidx.cardview.widget.CardView
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.fragment.BucketListItemFragment
 import com.rybarstudios.bucketlist.model.BucketItem
-import kotlinx.android.synthetic.main.bucket_list_item_layout.view.*
+import kotlinx.android.synthetic.main.bucketlist_item_card_layout.view.*
 
-class MyBucketListItemRecyclerViewAdapter(
+class BucketListItemRecyclerViewAdapter(
     private val data: MutableList<BucketItem>,
     private val listener: BucketListItemFragment.OnBucketItemListFragmentInteractionListener?
-) : RecyclerView.Adapter<MyBucketListItemRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<BucketListItemRecyclerViewAdapter.ViewHolder>() {
 
     lateinit var context: Context
 
@@ -40,7 +40,7 @@ class MyBucketListItemRecyclerViewAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val viewGroup =
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.bucket_list_item_layout, parent, false)
+                .inflate(R.layout.bucketlist_item_card_layout, parent, false)
         context = parent.context
         return ViewHolder(viewGroup)
     }
