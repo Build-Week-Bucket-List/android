@@ -68,8 +68,6 @@ class BucketItemRecyclerViewAdapter(
 
             //Starts DetailFragmentActivity when bucketListItem is clicked -- TC
 
-
-
             val detailIntent = Intent(context, DetailFragmentActivity::class.java)
             detailIntent.putExtra(DETAIL_INTENT_KEY, data[position])
 
