@@ -75,6 +75,7 @@ class PhotoGalleryDetailFragment : Fragment() {
             val imageUri: Uri? = data?.data
             if (imageUri != null) {
                 imageList.add(imageUri)
+                photo_gallery_detail_recycler_view.adapter?.notifyItemInserted(imageList.size - 1)
             }
         }
     }
