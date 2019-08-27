@@ -66,6 +66,19 @@ class BucketItemListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         BucketListItem.bucketListItem.add(BucketItem("machu pichu", "visit machu pichu", false, 0))
+        BucketListItem.bucketListItem.add(BucketItem("Marathon", "Run a full maraton", false, 1))
+        BucketListItem.bucketListItem.add(BucketItem("Skydiving", "Do a high altitude skydive", false, 2))
+        BucketListItem.bucketListItem.add(BucketItem("Giza Pyramids", "See the Great Pyramids of Giza", false, 3))
+        BucketListItem.bucketListItem.add(BucketItem("Alligator", "Wrestle an alligator to establish dominance", false, 4))
+        BucketListItem.bucketListItem.add(BucketItem("President", "Meet the President of the United States", false, 5))
+        BucketListItem.bucketListItem.add(BucketItem("Mike Tyson", "Knock Out Mike Tyson IRL", false, 6))
+        BucketListItem.bucketListItem.add(BucketItem("Go-Kart", "Hire a bunch of actors to dress up as mario characters and go go-karting", false, 7))
+        BucketListItem.bucketListItem.add(BucketItem("RATM", "Rage Against The Machine with Rage Against The Machine", false, 8))
+        BucketListItem.bucketListItem.add(BucketItem("7 Continents", "Travel to all 7 continents", false, 9))
+        BucketListItem.bucketListItem.add(BucketItem("Appalachain Trail", "Hike the entire appalachain trail", false, 10))
+        BucketListItem.bucketListItem.add(BucketItem("Tornado", "See a tornado", false, 11))
+        BucketListItem.bucketListItem.add(BucketItem("Hurrican", "Fly into a hurricane with the NHS Hurrican Chasers", false, 12))
+
 
         bucket_item_list.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
