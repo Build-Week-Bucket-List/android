@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
     android:background="@color/colorPrimaryDark"
-    tools:context=".fragment.AddButtonFragment">
+    tools:context=".fragment.BucketItemAddButtonFragment">
 
     <Button
         android:id="@+id/btn_add_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_margin="8dp"
         android:backgroundTint="@color/colorPrimary"
         android:text="add"
         android:textAllCaps="false"
