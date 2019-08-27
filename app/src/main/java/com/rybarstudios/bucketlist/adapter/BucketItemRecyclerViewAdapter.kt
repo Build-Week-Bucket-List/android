@@ -14,6 +14,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import com.rybarstudios.bucketlist.R
+import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.bucketListFragmentActivityContext
 import com.rybarstudios.bucketlist.activity.DetailFragmentActivity
 import com.rybarstudios.bucketlist.fragment.BucketListItemFragment
@@ -70,12 +71,12 @@ class BucketItemRecyclerViewAdapter(
             Toast.makeText(context, "${data[position].indexId}", Toast.LENGTH_SHORT).show()
 
             //Starts DetailFragmentActivity when bucketListItem is clicked -- TC
-            val detailIntent = Intent(bucketListFragmentActivityContext, DetailFragmentActivity::class.java)
+            val detailIntent = Intent(context, DetailFragmentActivity::class.java)
 
             val bundle = Bundle()
             bundle.putSerializable(DETAIL_INTENT_KEY, data[position])
 
-            startActivity(DetailFragmentActivity(), detailIntent, bundle)
+            startActivity(context, detailIntent, bundle)
 
         }
 

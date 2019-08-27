@@ -17,6 +17,11 @@ class BucketListFragmentActivity : AppCompatActivity(),
         lateinit var bucketListFragmentActivityContext: Context
     }
 
+
+
+
+
+
     override fun onBucketItemAddButtonFragmentInteraction(item: BucketItem) {
         /*val buttonFragment = RatingsFragment()
 
@@ -62,6 +67,8 @@ class BucketListFragmentActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bucket_list_fragment)
+
+
 
 
 
