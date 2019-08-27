@@ -1,41 +1,52 @@
 package com.rybarstudios.bucketlist.activity
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.fragment.BucketItemAddButtonFragment
-import com.rybarstudios.bucketlist.fragment.BucketListItemFragment
+import com.rybarstudios.bucketlist.fragment.BucketItemAddFragment
+import com.rybarstudios.bucketlist.fragment.BucketItemListFragment
 import com.rybarstudios.bucketlist.model.BucketItem
 
 class BucketListFragmentActivity : AppCompatActivity(),
     BucketItemAddButtonFragment.OnBucketItemAddButtonFragmentInteractionListener,
-    BucketListItemFragment.OnBucketItemListFragmentInteractionListener {
+    BucketItemListFragment.OnBucketItemListFragmentInteractionListener,
+    BucketItemAddFragment.OnBucketItemAddFragmentInteractionListener {
 
     companion object {
         const val FRAGMENT_KEY = "P98AINSDKFIUH09O12U3FIUH"
-        lateinit var bucketListFragmentActivityContext: Context
+        const val DETAIL_INTENT_KEY = "DETAIL_INTENT_KEY"
     }
 
+    override fun onBucketItemListFragmentInteraction(item: BucketItem) {
+        /*val listFragment = BucketListItemFragment()
 
+        val bundle = Bundle()
+        bundle.putSerializable(FRAGMENT_KEY, item)
+        listFragment.arguments = bundle
 
-
-
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.ratings_fragment_holder, listFragment)
+            .addToBackStack(null)
+            .commit()*/
+    }
 
     override fun onBucketItemAddButtonFragmentInteraction(item: BucketItem) {
-        /*val buttonFragment = RatingsFragment()
+        val buttonFragment = BucketItemAddFragment()
 
         val bundle = Bundle()
         bundle.putSerializable(FRAGMENT_KEY, item)
         buttonFragment.arguments = bundle
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.ratings_fragment_holder, buttonFragment)
+            .replace(R.id.btn_bucket_item_add_fragment_holder, buttonFragment)
             .addToBackStack(null)
-            .commit()*/
+            .commit()
     }
 
-    /*override fun onRatingsFragmentInteraction(item: MovieItem) {
+    override fun onBucketItemAddFragmentInteraction(item: BucketItem) {
+
+        /*override fun onRatingsFragmentInteraction(item: MovieItem) {
         if (item.movieName == "" && item.changedBoolean) {
             // Delete the item
             // Refactor movieList to update all movieIndexPos values
@@ -50,18 +61,6 @@ class BucketListFragmentActivity : AppCompatActivity(),
             list_fragment.adapter?.notifyItemInserted(item.movieIndexPos)
         }
     }*/
-
-    override fun onBucketItemListFragmentInteraction(item: BucketItem) {
-        /*val listFragment = BucketListItemFragment()
-
-        val bundle = Bundle()
-        bundle.putSerializable(FRAGMENT_KEY, item)
-        listFragment.arguments = bundle
-
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.ratings_fragment_holder, listFragment)
-            .addToBackStack(null)
-            .commit()*/
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,7 +76,7 @@ class BucketListFragmentActivity : AppCompatActivity(),
             .replace(R.id.btn_bucket_item_add_fragment_holder, fragmentButton)
             .commit()
 
-        val fragmentList = BucketListItemFragment()
+        val fragmentList = BucketItemListFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.bucket_item_list_fragment_holder, fragmentList)
             .commit()
