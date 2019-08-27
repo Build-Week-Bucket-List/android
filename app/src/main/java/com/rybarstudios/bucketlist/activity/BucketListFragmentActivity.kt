@@ -4,13 +4,12 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.ListFragment
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.fragment.AddButtonFragment
 import com.rybarstudios.bucketlist.fragment.BucketListItemFragment
 import com.rybarstudios.bucketlist.model.BucketItem
 
-class BucketListActivity : AppCompatActivity(),
+class BucketListFragmentActivity : AppCompatActivity(),
     AddButtonFragment.OnButtonFragmentInteractionListener,
     BucketListItemFragment.OnBucketItemListFragmentInteractionListener {
 
@@ -65,7 +64,7 @@ class BucketListActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bucket_list)
+        setContentView(R.layout.activity_bucket_list_fragment)
 
 
 

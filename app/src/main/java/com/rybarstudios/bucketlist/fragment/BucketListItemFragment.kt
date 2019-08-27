@@ -10,7 +10,6 @@ import androidx.fragment.app.ListFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rybarstudios.bucketlist.R
-import com.rybarstudios.bucketlist.activity.BucketListActivity
 import com.rybarstudios.bucketlist.adapter.MyBucketListItemRecyclerViewAdapter
 import com.rybarstudios.bucketlist.model.BucketItem
 import com.rybarstudios.bucketlist.model.BucketListItem
