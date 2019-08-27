@@ -82,6 +82,9 @@ class BucketItemAddFragment : Fragment() {
                     // Notify user they cannot save content w/o adding a title
                     Toast.makeText(context, "A title is required to add an item", Toast.LENGTH_SHORT).show()
                 }
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.remove(this)
+                    ?.commit()
             }
             false
         })
