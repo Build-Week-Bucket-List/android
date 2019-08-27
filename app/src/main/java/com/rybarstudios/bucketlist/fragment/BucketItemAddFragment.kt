@@ -3,12 +3,17 @@ package com.rybarstudios.bucketlist.fragment
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import com.rybarstudios.bucketlist.R
+import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY
+import com.rybarstudios.bucketlist.model.BucketItem
+import kotlinx.android.synthetic.main.fragment_bucket_item_add.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +32,7 @@ class BucketItemAddFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
+    private var listener: OnBucketItemAddFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,13 +51,45 @@ class BucketItemAddFragment : Fragment() {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
+    fun onButtonPressed(item: BucketItem) {
+        listener?.onBucketItemAddFragmentInteraction(item)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val item = arguments?.getSerializable(FRAGMENT_KEY) as BucketItem
+
+        et_bucket_list_name.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+                et_bucket_list_description.requestFocus()
+                //return@OnKeyListener true
+            }
+            false
+        })
+
+        // User input is saved upon pressing the enter key while in the description box
+        et_bucket_list_description.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+
+                // Bucket List Name is required
+                if (et_bucket_list_name != null) {
+                    item.name = et_bucket_list_name.text.toString()
+                    item.description = et_bucket_list_description.text.toString()
+                    listener?.onBucketItemAddFragmentInteraction(item)
+                    //return@OnKeyListener true
+                } else {
+                    // Notify user they cannot save content w/o adding a title
+                    Toast.makeText(context, "A title is required to add an item", Toast.LENGTH_SHORT).show()
+                }
+            }
+            false
+        })
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
+        if (context is OnBucketItemAddFragmentInteractionListener) {
             listener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
@@ -75,9 +112,9 @@ class BucketItemAddFragment : Fragment() {
      * (http://developer.android.com/training/basics/fragments/communicating.html)
      * for more information.
      */
-    interface OnFragmentInteractionListener {
+    interface OnBucketItemAddFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
+        fun onBucketItemAddFragmentInteraction(item: BucketItem)
     }
 
     companion object {
