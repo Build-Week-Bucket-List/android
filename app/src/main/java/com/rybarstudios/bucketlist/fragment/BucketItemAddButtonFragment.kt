@@ -2,18 +2,15 @@ package com.rybarstudios.bucketlist.fragment
 
 import android.content.Context
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.ListFragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import android.widget.Toast
+
 import com.rybarstudios.bucketlist.R
-import com.rybarstudios.bucketlist.adapter.BucketListItemRecyclerViewAdapter
 import com.rybarstudios.bucketlist.model.BucketItem
-import com.rybarstudios.bucketlist.model.BucketListItem
-import kotlinx.android.synthetic.main.fragment_bucketlist_item_list.*
+import kotlinx.android.synthetic.main.fragment_bucket_item_add_button.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,21 +20,19 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [ListFragment.OnMovieListFragmentInteractionListener] interface
+ * [button.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [ListFragment.newInstance] factory method to
+ * Use the [button.newInstance] factory method to
  * create an instance of this fragment.
- *
  */
-class BucketListItemFragment : Fragment() {
+class BucketItemAddButtonFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var bucketItemListListener: OnBucketItemListFragmentInteractionListener? = null
+    private var listener: OnBucketItemAddButtonFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
@@ -49,44 +44,34 @@ class BucketListItemFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bucketlist_item_list, container, false)
+        return inflater.inflate(R.layout.fragment_bucket_item_add_button, container, false)
     }
 
-    /**
-     * Called immediately after [.onCreateView]
-     * has returned, but before any saved state has been restored in to the view.
-     * This gives subclasses a chance to initialize themselves once
-     * they know their view hierarchy has been completely created.  The fragment's
-     * view hierarchy is not however attached to its parent at this point.
-     * @param view The View returned by [.onCreateView].
-     * @param savedInstanceState If non-null, this fragment is being re-constructed
-     * from a previous saved state as given here.
-     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        bucket_item_list.setHasFixedSize(true)
-        val layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        bucket_item_list.layoutManager = layoutManager
-        val movieListAdapter = BucketListItemRecyclerViewAdapter(
-            BucketListItem.bucketListItem,
-            bucketItemListListener
-        )
-        bucket_item_list.adapter = movieListAdapter
+        btn_add_item.setOnClickListener {
+            Toast.makeText(context, "Add Bucket List Item", Toast.LENGTH_SHORT).show()
+            listener?.onBucketItemAddButtonFragmentInteraction(BucketItem("", "", false, 0))
+        }
+    }
+
+    fun onButtonPressed(item: BucketItem) {
+        listener?.onBucketItemAddButtonFragmentInteraction(item)
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnBucketItemListFragmentInteractionListener) {
-            bucketItemListListener = context
+        if (context is OnBucketItemAddButtonFragmentInteractionListener) {
+            listener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement OnShoppingListFragmentInteractionListener")
+            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
         }
     }
 
     override fun onDetach() {
         super.onDetach()
-        bucketItemListListener = null
+        listener = null
     }
 
     /**
@@ -100,8 +85,8 @@ class BucketListItemFragment : Fragment() {
      * (http://developer.android.com/training/basics/fragments/communicating.html)
      * for more information.
      */
-    interface OnBucketItemListFragmentInteractionListener {
-        fun onBucketItemListFragmentInteraction(item: BucketItem)
+    interface OnBucketItemAddButtonFragmentInteractionListener {
+        fun onBucketItemAddButtonFragmentInteraction(item: BucketItem)
     }
 
     companion object {
@@ -111,12 +96,12 @@ class BucketListItemFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment ListFragment.
+         * @return A new instance of fragment button.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            ListFragment().apply {
+            BucketItemAddButtonFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

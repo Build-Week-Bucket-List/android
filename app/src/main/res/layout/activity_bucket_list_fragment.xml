@@ -8,10 +8,10 @@
     tools:context=".activity.BucketListFragmentActivity">
 
     <FrameLayout
-        android:id="@+id/list_fragment_holder"
+        android:id="@+id/bucket_item_list_fragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_fragment_holder"
+        app:layout_constraintBottom_toTopOf="@+id/btn_bucket_item_add_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -25,13 +25,13 @@
     </FrameLayout>
 
     <FrameLayout
-        android:id="@+id/button_fragment_holder"
+        android:id="@+id/btn_bucket_item_add_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_fragment_holder">
+        app:layout_constraintTop_toBottomOf="@+id/bucket_item_list_fragment">
 
         <!--<fragment
             android:id="@+id/button_fragment_holder"
