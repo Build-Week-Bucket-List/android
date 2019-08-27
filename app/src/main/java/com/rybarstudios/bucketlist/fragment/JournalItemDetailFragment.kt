@@ -60,7 +60,7 @@ class JournalItemDetailFragment : Fragment() {
         }
 
         button_add_journal_entry.setOnClickListener {
-            
+
         }
     }
 
