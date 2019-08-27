@@ -39,7 +39,7 @@ class BucketListFragmentActivity : AppCompatActivity(),
         buttonFragment.arguments = bundle
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.btn_bucket_item_add_fragment_holder, buttonFragment)
+            .replace(R.id.bucket_item_add_fragment_holder, buttonFragment)
             .addToBackStack(null)
             .commit()
     }
@@ -67,10 +67,6 @@ class BucketListFragmentActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bucket_list_fragment)
 
-
-
-
-
         val fragmentButton = BucketItemAddButtonFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.btn_bucket_item_add_fragment_holder, fragmentButton)
@@ -80,16 +76,5 @@ class BucketListFragmentActivity : AppCompatActivity(),
         supportFragmentManager.beginTransaction()
             .replace(R.id.bucket_item_list_fragment_holder, fragmentList)
             .commit()
-
-        /*if (movieList.size == 0) {
-            val fragmentRating = RatingsFragment()
-
-            val bundle = Bundle()
-            bundle.putSerializable(FRAGMENT_KEY, MovieItem("", 0, 0, false))
-            fragmentRating.arguments = bundle
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.ratings_fragment_holder, fragmentRating)
-                .addToBackStack(null)
-                .commit()*/
     }
 }
