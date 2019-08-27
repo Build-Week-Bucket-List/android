@@ -5,12 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.fragment.BucketItemAddButtonFragment
-import com.rybarstudios.bucketlist.fragment.BucketListItemFragment
+import com.rybarstudios.bucketlist.fragment.BucketItemListFragment
 import com.rybarstudios.bucketlist.model.BucketItem
 
 class BucketListFragmentActivity : AppCompatActivity(),
     BucketItemAddButtonFragment.OnBucketItemAddButtonFragmentInteractionListener,
-    BucketListItemFragment.OnBucketItemListFragmentInteractionListener {
+    BucketItemListFragment.OnBucketItemListFragmentInteractionListener {
 
     companion object {
         const val FRAGMENT_KEY = "P98AINSDKFIUH09O12U3FIUH"
@@ -77,7 +77,7 @@ class BucketListFragmentActivity : AppCompatActivity(),
             .replace(R.id.btn_bucket_item_add_fragment_holder, fragmentButton)
             .commit()
 
-        val fragmentList = BucketListItemFragment()
+        val fragmentList = BucketItemListFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.bucket_item_list_fragment_holder, fragmentList)
             .commit()
