@@ -10,6 +10,7 @@ import android.widget.Toast
 
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.model.BucketItem
+import kotlinx.android.synthetic.main.fragment_button.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -50,7 +51,7 @@ class AddButtonFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         btn_add_item.setOnClickListener {
-            //Toast.makeText(context, "Add", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Add Bucket List Item", Toast.LENGTH_SHORT).show()
             listener?.onButtonFragmentInteraction(BucketItem("", "", false, 0))
         }
     }

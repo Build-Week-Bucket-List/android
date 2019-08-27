@@ -4,6 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/activity_fragment_frame"
     tools:context=".activity.BucketListActivity">
+
+    <FrameLayout
+        android:id="@+id/list_fragment_holder"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_fragment_holder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!--<fragment
+            android:id="@+id/list_fragment_holder"
+            android:name="com.lambdaschool.animatedratingbar.fragment.ListFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />-->
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/button_fragment_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/list_fragment_holder">
+
+        <!--<fragment
+            android:id="@+id/button_fragment_holder"
+            android:name="com.lambdaschool.animatedratingbar.fragment.AddButtonFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />-->
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
