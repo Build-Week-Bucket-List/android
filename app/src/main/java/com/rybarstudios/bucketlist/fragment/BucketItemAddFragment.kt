@@ -63,7 +63,7 @@ class BucketItemAddFragment : Fragment() {
         et_bucket_list_name.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
                 et_bucket_list_description.requestFocus()
-                //return@OnKeyListener true
+                return@OnKeyListener true
             }
             false
         })
@@ -77,7 +77,7 @@ class BucketItemAddFragment : Fragment() {
                     item.name = et_bucket_list_name.text.toString()
                     item.description = et_bucket_list_description.text.toString()
                     listener?.onBucketItemAddFragmentInteraction(item)
-                    //return@OnKeyListener true
+                    return@OnKeyListener true
                 } else {
                     // Notify user they cannot save content w/o adding a title
                     Toast.makeText(context, "A title is required to add an item", Toast.LENGTH_SHORT).show()

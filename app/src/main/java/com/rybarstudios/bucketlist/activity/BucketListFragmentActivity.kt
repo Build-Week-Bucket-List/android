@@ -7,6 +7,8 @@ import com.rybarstudios.bucketlist.fragment.BucketItemAddButtonFragment
 import com.rybarstudios.bucketlist.fragment.BucketItemAddFragment
 import com.rybarstudios.bucketlist.fragment.BucketItemListFragment
 import com.rybarstudios.bucketlist.model.BucketItem
+import com.rybarstudios.bucketlist.model.BucketListItem.bucketListItem
+import kotlinx.android.synthetic.main.fragment_bucket_item_list.*
 
 class BucketListFragmentActivity : AppCompatActivity(),
     BucketItemAddButtonFragment.OnBucketItemAddButtonFragmentInteractionListener,
@@ -45,6 +47,9 @@ class BucketListFragmentActivity : AppCompatActivity(),
     }
 
     override fun onBucketItemAddFragmentInteraction(item: BucketItem) {
+        item.indexId = bucketListItem.size
+        bucketListItem.add(item)
+        bucket_item_list.adapter?.notifyItemInserted(item.indexId)
 
         /*override fun onRatingsFragmentInteraction(item: MovieItem) {
         if (item.movieName == "" && item.changedBoolean) {
@@ -67,6 +72,7 @@ class BucketListFragmentActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bucket_list_fragment)
 
+        // Inflate activity_bucket_list_fragment FrameLayout(s) with the fragments
         val fragmentButton = BucketItemAddButtonFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.btn_bucket_item_add_fragment_holder, fragmentButton)
