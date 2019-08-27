@@ -3,14 +3,13 @@ package com.rybarstudios.bucketlist.activity
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.ListFragment
 import com.rybarstudios.bucketlist.R
-import com.rybarstudios.bucketlist.fragment.AddButtonFragment
+import com.rybarstudios.bucketlist.fragment.BucketItemAddButtonFragment
 import com.rybarstudios.bucketlist.fragment.BucketListItemFragment
 import com.rybarstudios.bucketlist.model.BucketItem
 
-class BucketListActivity : AppCompatActivity(),
-    AddButtonFragment.OnButtonFragmentInteractionListener,
+class BucketListFragmentActivity : AppCompatActivity(),
+    BucketItemAddButtonFragment.OnBucketItemAddButtonFragmentInteractionListener,
     BucketListItemFragment.OnBucketItemListFragmentInteractionListener {
 
     companion object {
@@ -18,7 +17,7 @@ class BucketListActivity : AppCompatActivity(),
         lateinit var context: Context
     }
 
-    override fun onButtonFragmentInteraction(item: BucketItem) {
+    override fun onBucketItemAddButtonFragmentInteraction(item: BucketItem) {
         /*val buttonFragment = RatingsFragment()
 
         val bundle = Bundle()
@@ -62,18 +61,18 @@ class BucketListActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bucket_list)
+        setContentView(R.layout.activity_bucket_list_fragment)
 
 
 
-        val fragmentButton = AddButtonFragment()
+        val fragmentButton = BucketItemAddButtonFragment()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.button_fragment_holder, fragmentButton)
+            .replace(R.id.btn_bucket_item_add_fragment, fragmentButton)
             .commit()
 
         val fragmentList = BucketListItemFragment()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.list_fragment_holder, fragmentList)
+            .replace(R.id.bucket_item_list_fragment, fragmentList)
             .commit()
 
         /*if (movieList.size == 0) {

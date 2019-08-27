@@ -17,6 +17,6 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     tools:context=".fragment.BucketListItemFragment"
-    tools:listitem="@layout/bucket_list_item_layout" />
+    tools:listitem="@layout/layout_bucket_item" />
 
 </LinearLayout>
