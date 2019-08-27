@@ -4,21 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.fragment.BucketItemAddButtonFragment
-<<<<<<< HEAD
-=======
 import com.rybarstudios.bucketlist.fragment.BucketItemAddFragment
->>>>>>> origin/matthew-nelson
 import com.rybarstudios.bucketlist.fragment.BucketItemListFragment
 import com.rybarstudios.bucketlist.model.BucketItem
 
 class BucketListFragmentActivity : AppCompatActivity(),
     BucketItemAddButtonFragment.OnBucketItemAddButtonFragmentInteractionListener,
-<<<<<<< HEAD
-    BucketItemListFragment.OnBucketItemListFragmentInteractionListener {
-=======
     BucketItemListFragment.OnBucketItemListFragmentInteractionListener,
     BucketItemAddFragment.OnBucketItemAddFragmentInteractionListener {
->>>>>>> origin/matthew-nelson
 
     companion object {
         const val FRAGMENT_KEY = "P98AINSDKFIUH09O12U3FIUH"
