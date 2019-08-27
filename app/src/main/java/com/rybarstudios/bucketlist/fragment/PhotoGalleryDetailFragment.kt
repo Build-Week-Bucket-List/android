@@ -1,6 +1,8 @@
 package com.rybarstudios.bucketlist.fragment
 
+import android.app.Activity.RESULT_OK
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 
 import com.rybarstudios.bucketlist.R
+import com.rybarstudios.bucketlist.adapter.PhotoGalleryDetailAdapter
 import kotlinx.android.synthetic.main.fragment_photo_gallery_detail.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -31,6 +34,8 @@ class PhotoGalleryDetailFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
+
+    val imageList = mutableListOf<Uri>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +59,23 @@ class PhotoGalleryDetailFragment : Fragment() {
         photo_gallery_detail_recycler_view.apply {
             setHasFixedSize(true)
             layoutManager = GridLayoutManager(context, 2)
-            adapter = PhotoGalleryDetailAdapter()
+            adapter = PhotoGalleryDetailAdapter(imageList)
+        }
+
+        photo_gallery_detail_floatingActionButton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/*"
+            startActivityForResult(intent, IMAGE_REQUEST_CODE)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
+            val imageUri: Uri? = data?.data
+            if (imageUri != null) {
+                imageList.add(imageUri)
+            }
         }
     }
 
@@ -102,6 +123,10 @@ class PhotoGalleryDetailFragment : Fragment() {
          * @param param2 Parameter 2.
          * @return A new instance of fragment PhotoGalleryDetailFragment.
          */
+
+        const val IMAGE_REQUEST_CODE = 42
+
+
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
