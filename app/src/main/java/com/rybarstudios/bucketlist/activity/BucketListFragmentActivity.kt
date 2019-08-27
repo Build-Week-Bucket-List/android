@@ -14,7 +14,7 @@ class BucketListFragmentActivity : AppCompatActivity(),
 
     companion object {
         const val FRAGMENT_KEY = "P98AINSDKFIUH09O12U3FIUH"
-        lateinit var context: Context
+        lateinit var bucketListFragmentActivityContext: Context
     }
 
     override fun onBucketItemAddButtonFragmentInteraction(item: BucketItem) {
