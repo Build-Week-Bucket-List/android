@@ -37,11 +37,11 @@
 
     <ImageView
         android:id="@+id/checkmark"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_gravity="end"
         android:layout_margin="8dp"
-        android:src="@drawable/ic_launcher_background" />
+        android:src="@drawable/check" />
 
 
 </androidx.cardview.widget.CardView>
