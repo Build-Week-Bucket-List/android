@@ -21,16 +21,6 @@ class BucketListFragmentActivity : AppCompatActivity(),
     }
 
     override fun onBucketItemListFragmentInteraction(item: BucketItem) {
-        /*val listFragment = BucketListItemFragment()
-
-        val bundle = Bundle()
-        bundle.putSerializable(FRAGMENT_KEY, item)
-        listFragment.arguments = bundle
-
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.ratings_fragment_holder, listFragment)
-            .addToBackStack(null)
-            .commit()*/
     }
 
     override fun onBucketItemAddButtonFragmentInteraction(item: BucketItem) {
@@ -50,22 +40,6 @@ class BucketListFragmentActivity : AppCompatActivity(),
         item.indexId = BucketListItem.bucketListItem.size
         BucketListItem.bucketListItem.add(item)
         bucket_item_list.adapter?.notifyItemInserted(item.indexId)
-
-        /*override fun onRatingsFragmentInteraction(item: MovieItem) {
-        if (item.movieName == "" && item.changedBoolean) {
-            // Delete the item
-            // Refactor movieList to update all movieIndexPos values
-        } else if (item.changedBoolean) {
-            // Item was modified
-            movieList[item.movieIndexPos] = item
-            list_fragment.adapter?.notifyItemChanged(item.movieIndexPos)
-        } else if (item.movieName != ""){
-            // New item added
-            item.movieIndexPos = movieList.size
-            movieList.add(item)
-            list_fragment.adapter?.notifyItemInserted(item.movieIndexPos)
-        }
-    }*/
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
