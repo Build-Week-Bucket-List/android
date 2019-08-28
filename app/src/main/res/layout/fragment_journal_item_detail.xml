@@ -3,10 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.JournalItemDetailFragment">
+    tools:context=".fragment.JournalItemDetailFragment"
+    android:id="@+id/journal_item_detail_fragment_holder">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <EditText
+        android:id="@+id/journal_entry_detail_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment" />
