@@ -68,7 +68,6 @@ class ComboViewDetailFragment : Fragment() {
     private fun generateImageView(imageSrc: Uri) : ImageView {
         val imageView = ImageView(context)
         imageView.setImageURI(imageSrc)
-        imageView.adjustViewBounds = true
         return imageView
     }
 

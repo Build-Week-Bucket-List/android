@@ -73,13 +73,15 @@ class BucketItemAddFragment : Fragment() {
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
 
                 // Bucket List Name is required
-                if (et_bucket_list_name != null) {
+                if (et_bucket_list_name.text.toString() != "") {
                     item.name = et_bucket_list_name.text.toString()
                     item.description = et_bucket_list_description.text.toString()
                     listener?.onBucketItemAddFragmentInteraction(item)
                     activity?.supportFragmentManager?.beginTransaction()
                         ?.remove(this)
                         ?.commit()
+                    // remove the fragment from the backstack
+                    activity?.supportFragmentManager?.popBackStack()
                 } else {
                     // Notify user they cannot save content w/o adding a title
                     Toast.makeText(context, "A title is required to add an item", Toast.LENGTH_SHORT).show()

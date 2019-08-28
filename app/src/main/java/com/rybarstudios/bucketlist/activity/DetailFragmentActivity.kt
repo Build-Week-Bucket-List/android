@@ -5,15 +5,10 @@ import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.DETAIL_INTENT_KEY
 import com.rybarstudios.bucketlist.fragment.ComboViewDetailFragment
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY
-import com.rybarstudios.bucketlist.fragment.BucketItemListFragment
 import com.rybarstudios.bucketlist.fragment.JournalItemDetailFragment
 import com.rybarstudios.bucketlist.fragment.JournalItemListFragment
 import com.rybarstudios.bucketlist.fragment.PhotoGalleryDetailFragment
@@ -22,13 +17,13 @@ import com.rybarstudios.bucketlist.model.BucketItem
 class DetailFragmentActivity : AppCompatActivity(),
     JournalItemDetailFragment.OnJournalItemFragmentInteractionListener,
     PhotoGalleryDetailFragment.PhotoGalleryOnFragmentInteractionListener,
-    JournalItemListFragment.OnFragmentInteractionListener,
+    JournalItemListFragment.OnJournalItemListFragmentInteractionListener,
     ComboViewDetailFragment.ComboViewOnFragmentInteractionListener{
     override fun onComboViewFragmentInteraction(uri: Uri) {
 
     }
 
-    override fun onFragmentInteraction(item: BucketItem) {
+    override fun onJournalItemListFragmentInteraction(item: BucketItem) {
         val listItem = JournalItemDetailFragment()
         val bundle = Bundle()
         bundle.putSerializable(FRAGMENT_KEY, item)
@@ -40,7 +35,6 @@ class DetailFragmentActivity : AppCompatActivity(),
             .commit()
 
     }
-
 
     override fun onJournalItemFragmentInteraction(item: BucketItem) {
 
@@ -59,8 +53,8 @@ class DetailFragmentActivity : AppCompatActivity(),
         bottomNavigation?.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         //catch data from bucket recyclerview
-        var bundle: Bundle? = intent.extras
-        var bucketItem = bundle?.getSerializable(DETAIL_INTENT_KEY) as BucketItem
+        val bundle: Bundle? = intent.extras
+        val bucketItem = bundle?.getSerializable(DETAIL_INTENT_KEY) as BucketItem
 
         //inflate journal list in onCreate
         val fragmentList = JournalItemListFragment()
