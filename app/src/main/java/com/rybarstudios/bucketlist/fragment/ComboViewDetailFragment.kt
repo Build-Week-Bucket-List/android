@@ -14,6 +14,8 @@ import android.widget.TextView
 import androidx.core.view.marginStart
 
 import com.rybarstudios.bucketlist.R
+import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity
+import com.rybarstudios.bucketlist.model.BucketItem
 import kotlinx.android.synthetic.main.fragment_combo_view_detail.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -34,6 +36,7 @@ class ComboViewDetailFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var listener: ComboViewOnFragmentInteractionListener? = null
+    var item: BucketItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,12 +57,14 @@ class ComboViewDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        for (i in 0 until PhotoGalleryDetailFragment.imageList.size) {
-            horizontal_scroll_view_linear_layout.addView(generateImageView(PhotoGalleryDetailFragment.imageList[i]), i)
+        val item = arguments?.getSerializable(BucketListFragmentActivity.FRAGMENT_KEY) as BucketItem
+
+        for (i in 0 until item.imageUri.size) {
+            horizontal_scroll_view_linear_layout.addView(generateImageView(item.imageUri[i]), i)
         }
 
         for (i in 0 until 4) {
-            combo_view_scroll_view_linear_layout.addView(generateTextView("Test"))
+            combo_view_scroll_view_linear_layout.addView(generateTextView(item.journalEntryTitle[i]))
         }
 
 
@@ -68,7 +73,6 @@ class ComboViewDetailFragment : Fragment() {
     private fun generateImageView(imageSrc: Uri) : ImageView {
         val imageView = ImageView(context)
         imageView.setImageURI(imageSrc)
-        imageView.adjustViewBounds = true
         return imageView
     }
 
@@ -82,8 +86,8 @@ class ComboViewDetailFragment : Fragment() {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onComboViewFragmentInteraction(uri)
+    fun onButtonPressed(item: BucketItem) {
+        listener?.onComboViewFragmentInteraction(item)
     }
 
     override fun onAttach(context: Context) {
@@ -113,7 +117,7 @@ class ComboViewDetailFragment : Fragment() {
      */
     interface ComboViewOnFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onComboViewFragmentInteraction(uri: Uri)
+        fun onComboViewFragmentInteraction(item: BucketItem)
     }
 
     companion object {

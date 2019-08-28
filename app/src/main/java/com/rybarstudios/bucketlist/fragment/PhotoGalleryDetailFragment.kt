@@ -13,7 +13,9 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 
 import com.rybarstudios.bucketlist.R
+import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity
 import com.rybarstudios.bucketlist.adapter.PhotoGalleryDetailAdapter
+import com.rybarstudios.bucketlist.model.BucketItem
 import kotlinx.android.synthetic.main.fragment_photo_gallery_detail.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -34,6 +36,7 @@ class PhotoGalleryDetailFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var listener: PhotoGalleryOnFragmentInteractionListener? = null
+    var item: BucketItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,10 +57,12 @@ class PhotoGalleryDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val item = arguments?.getSerializable(BucketListFragmentActivity.FRAGMENT_KEY) as BucketItem
+
         photo_gallery_detail_recycler_view.apply {
             setHasFixedSize(true)
             layoutManager = GridLayoutManager(context, 2)
-            adapter = PhotoGalleryDetailAdapter(imageList)
+            adapter = PhotoGalleryDetailAdapter(item.imageUri)
         }
         photo_gallery_detail_recycler_view.layoutManager?.generateDefaultLayoutParams()
 
@@ -71,17 +76,21 @@ class PhotoGalleryDetailFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
-            val imageUri: Uri? = data?.data
-            if (imageUri != null) {
-                imageList.add(imageUri)
-                photo_gallery_detail_recycler_view.adapter?.notifyItemInserted(imageList.size - 1)
+            val photoUri: Uri? = data?.data
+            if (photoUri != null) {
+                item?.imageUri?.add(photoUri)
+                item?.imageUri?.size?.minus(1)?.let {
+                    photo_gallery_detail_recycler_view.adapter?.notifyItemInserted(
+                        it
+                    )
+                }
             }
         }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onPhotoGalleryFragmentInteraction(uri)
+    fun onButtonPressed(item: BucketItem) {
+        listener?.onPhotoGalleryFragmentInteraction(item)
     }
 
     override fun onAttach(context: Context) {
@@ -111,7 +120,7 @@ class PhotoGalleryDetailFragment : Fragment() {
      */
     interface PhotoGalleryOnFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onPhotoGalleryFragmentInteraction(uri: Uri)
+        fun onPhotoGalleryFragmentInteraction(item: BucketItem)
     }
 
     companion object {
@@ -125,7 +134,6 @@ class PhotoGalleryDetailFragment : Fragment() {
          */
 
         const val IMAGE_REQUEST_CODE = 42
-        val imageList = mutableListOf<Uri>()
 
 
         // TODO: Rename and change types and number of parameters

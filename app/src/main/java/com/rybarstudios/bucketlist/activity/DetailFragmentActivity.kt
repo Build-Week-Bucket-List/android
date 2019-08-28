@@ -19,8 +19,16 @@ class DetailFragmentActivity : AppCompatActivity(),
     PhotoGalleryDetailFragment.PhotoGalleryOnFragmentInteractionListener,
     JournalItemListFragment.OnJournalItemListFragmentInteractionListener,
     ComboViewDetailFragment.ComboViewOnFragmentInteractionListener{
-    override fun onComboViewFragmentInteraction(uri: Uri) {
+    override fun onComboViewFragmentInteraction(item: BucketItem) {
+        val listItem = PhotoGalleryDetailFragment()
+        val bundle = Bundle()
+        bundle.putSerializable(FRAGMENT_KEY, item)
+        listItem.arguments = bundle
 
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.combo_view_detail_fragment, listItem)
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onJournalItemListFragmentInteraction(item: BucketItem) {
@@ -40,8 +48,16 @@ class DetailFragmentActivity : AppCompatActivity(),
 
     }
 
-    override fun onPhotoGalleryFragmentInteraction(uri: Uri) {
+    override fun onPhotoGalleryFragmentInteraction(item: BucketItem) {
+        val listItem = PhotoGalleryDetailFragment()
+        val bundle = Bundle()
+        bundle.putSerializable(FRAGMENT_KEY, item)
+        listItem.arguments = bundle
 
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.photo_gallery_detail_fragment, listItem)
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
