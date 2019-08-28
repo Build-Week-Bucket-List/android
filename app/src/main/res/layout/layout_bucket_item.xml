@@ -4,11 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:elevation="12dp"
-    app:cardCornerRadius="8dp"
+    style="@style/CardViewCustom"
     android:id="@+id/cardview_bucketlistitem"
-    app:cardBackgroundColor="@color/colorAccent"
-    android:layout_margin="8dp"
     android:orientation="horizontal">
 
     <LinearLayout

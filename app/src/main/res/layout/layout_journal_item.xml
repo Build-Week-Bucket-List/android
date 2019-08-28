@@ -2,11 +2,9 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    style="@style/CardViewCustom"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:backgroundTint="@color/colorAccent"
-    app:cardCornerRadius="8dp"
-    android:layout_margin="8dp"
     android:id="@+id/journal_parent_card"
     >
 
