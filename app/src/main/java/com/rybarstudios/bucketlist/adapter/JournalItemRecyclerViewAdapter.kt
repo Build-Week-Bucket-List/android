@@ -1,5 +1,6 @@
 package com.rybarstudios.bucketlist.adapter
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,9 +8,13 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.rybarstudios.bucketlist.R
+import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY
+import com.rybarstudios.bucketlist.fragment.JournalItemDetailFragment
+import com.rybarstudios.bucketlist.fragment.JournalItemListFragment
+import com.rybarstudios.bucketlist.model.BucketItem
 import kotlinx.android.synthetic.main.layout_journal_item.view.*
 
-class JournalItemRecyclerViewAdapter (val journalList: MutableList<String>): RecyclerView.Adapter<JournalItemRecyclerViewAdapter.ViewHolder>() {
+class JournalItemRecyclerViewAdapter (val journalList: MutableList<String>, private val listener: JournalItemListFragment.OnFragmentInteractionListener): RecyclerView.Adapter<JournalItemRecyclerViewAdapter.ViewHolder>() {
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
      * an item.
@@ -74,6 +79,13 @@ class JournalItemRecyclerViewAdapter (val journalList: MutableList<String>): Rec
         holder.name.text = journalList[position]
         holder.journalCard.setOnClickListener {
             //launch fragment journal item detail here
+            val journalEntry = JournalItemDetailFragment()
+            val bundle = Bundle()
+            bundle.putSerializable(FRAGMENT_KEY, journalList[position])
+
+            if (listener != null) {
+                listener.onFragmentInteraction(BucketItem("name", "desc", journalList, false, 1))
+            }
         }
     }
 
