@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 
 import com.rybarstudios.bucketlist.R
 import kotlinx.android.synthetic.main.fragment_combo_view_detail.*
@@ -49,6 +50,17 @@ class ComboViewDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        for (i in 0 until PhotoGalleryDetailFragment.imageList.size - 1) {
+            horizontal_scroll_view.addView(generateImageView(PhotoGalleryDetailFragment.imageList[i]), i)
+        }
+
+
+    }
+
+    private fun generateImageView(imageSrc: Uri) : ImageView {
+        val view = ImageView(context)
+        view.setImageURI(imageSrc)
+        return view
     }
 
     // TODO: Rename method, update argument and hook method into UI event
