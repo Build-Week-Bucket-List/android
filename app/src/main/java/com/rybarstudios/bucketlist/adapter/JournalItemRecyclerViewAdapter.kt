@@ -14,7 +14,10 @@ import com.rybarstudios.bucketlist.fragment.JournalItemListFragment
 import com.rybarstudios.bucketlist.model.BucketItem
 import kotlinx.android.synthetic.main.layout_journal_item.view.*
 
-class JournalItemRecyclerViewAdapter (val journalList: MutableList<String>, private val listener: JournalItemListFragment.OnFragmentInteractionListener): RecyclerView.Adapter<JournalItemRecyclerViewAdapter.ViewHolder>() {
+class JournalItemRecyclerViewAdapter (
+    val journalList: MutableList<String>,
+    private val listener: JournalItemListFragment.OnJournalItemListFragmentInteractionListener):
+    RecyclerView.Adapter<JournalItemRecyclerViewAdapter.ViewHolder>() {
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
      * an item.
@@ -84,7 +87,7 @@ class JournalItemRecyclerViewAdapter (val journalList: MutableList<String>, priv
             bundle.putSerializable(FRAGMENT_KEY, journalList[position])
 
             if (listener != null) {
-                listener.onFragmentInteraction(BucketItem("name", "desc", journalList, false, 1))
+                listener.onJournalItemListFragmentInteraction(BucketItem("name", "desc", journalList, false, 1))
             }
         }
     }
