@@ -52,7 +52,7 @@ class BucketItemAddButtonFragment : Fragment() {
 
         btn_add_item.setOnClickListener {
             // Send blank data to the BucketItemAddFragment listener
-            listener?.onBucketItemAddButtonFragmentInteraction(BucketItem("", "", null, null, null, false, 0))
+            listener?.onBucketItemAddButtonFragmentInteraction(BucketItem("", "", mutableListOf(), mutableListOf(), mutableListOf(), false, 0))
         }
     }
 

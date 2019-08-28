@@ -81,7 +81,7 @@ class DetailFragmentActivity : AppCompatActivity(),
         fragmentList.arguments = fragmentBundle
 
         supportFragmentManager.beginTransaction()      //this just calls fragment manager, .beginTransaction starts builder process
-            .replace(R.id.bottom_nav_container, fragmentList)
+            .replace(R.id.journal_entry_list_fragment, fragmentList)
             .commit()
 
     }
@@ -100,7 +100,7 @@ class DetailFragmentActivity : AppCompatActivity(),
             }
         }
         selectedFragment?.let { it1 ->
-            supportFragmentManager.beginTransaction().replace(R.id.bottom_nav_container,
+            supportFragmentManager.beginTransaction().replace(R.id.journal_entry_list_fragment,
                 it1
             ).commit()
         }

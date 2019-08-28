@@ -55,7 +55,7 @@ class JournalItemRecyclerViewAdapter(
      * @return The total number of items in this adapter.
      */
     override fun getItemCount(): Int {
-        return journalTitle?.size ?: 0
+        return journalTitle.size
     }
 
     /**
@@ -80,15 +80,14 @@ class JournalItemRecyclerViewAdapter(
      * @param position The position of the item within the adapter's data set.
      */
     override fun onBindViewHolder(holder: ViewHolder, journalEntryIndex: Int) {
-        if (journalTitle != null && data.journalEntry != null) {
-            // Set Journal CardView's name ET field
-            holder.name.setText(journalTitle[journalEntryIndex])
+        // Set Journal CardView's name ET field
+        holder.name.text = journalTitle[journalEntryIndex]
 
-            // On Click Listener for that journal entry
-            holder.journalCard.setOnClickListener {
-                    listener.onJournalItemListFragmentInteraction(data, journalEntryIndex)
-            }
+        // On Click Listener for that journal entry
+        holder.journalCard.setOnClickListener {
+            listener.onJournalItemListFragmentInteraction(data, journalEntryIndex)
         }
+
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
