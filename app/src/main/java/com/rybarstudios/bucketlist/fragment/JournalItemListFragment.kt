@@ -68,7 +68,10 @@ class JournalItemListFragment : Fragment() {
         }
 
         button_add_journal_entry.setOnClickListener {
-
+            val journalEntryIndex = item.journalEntryTitle.size
+            item.journalEntryTitle.add("New Entry")
+            item.journalEntry.add("")
+            journal_item_list.adapter?.notifyItemInserted(journalEntryIndex)
         }
     }
 

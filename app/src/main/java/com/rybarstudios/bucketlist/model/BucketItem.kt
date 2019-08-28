@@ -6,9 +6,9 @@ import java.io.Serializable
 class BucketItem (
     var name: String,
     var description: String,
-    var journalEntryTitle: MutableList<String>?,
-    var journalEntry: MutableList<String>?,
-    var imageUri: MutableList<Uri>?,
+    var journalEntryTitle: MutableList<String>,
+    var journalEntry: MutableList<String>,
+    var imageUri: MutableList<Uri>,
     var completed: Boolean,
     var indexId: Int
 ) : Serializable
