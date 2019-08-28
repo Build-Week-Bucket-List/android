@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.rybarstudios.bucketlist">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,7 +20,7 @@
         <activity
             android:name=".activity.DetailFragmentActivity"
             android:label="@string/title_activity_detail_fragment" />
-        <activity android:name=".activity.BucketListFragmentActivity" />
+        <activity android:name=".activity.BucketListFragmentActivity" android:windowSoftInputMode="adjustPan" />
         <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
