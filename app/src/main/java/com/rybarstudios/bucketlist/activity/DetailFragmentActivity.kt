@@ -11,13 +11,18 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.DETAIL_INTENT_KEY
+import com.rybarstudios.bucketlist.fragment.ComboViewDetailFragment
 import com.rybarstudios.bucketlist.fragment.JournalItemDetailFragment
 import com.rybarstudios.bucketlist.fragment.PhotoGalleryDetailFragment
 import com.rybarstudios.bucketlist.model.BucketItem
 
 class DetailFragmentActivity : AppCompatActivity(),
     JournalItemDetailFragment.OnJournalItemFragmentInteractionListener,
-    PhotoGalleryDetailFragment.PhotoGalleryOnFragmentInteractionListener {
+    PhotoGalleryDetailFragment.PhotoGalleryOnFragmentInteractionListener,
+    ComboViewDetailFragment.ComboViewOnFragmentInteractionListener{
+    override fun onComboViewFragmentInteraction(uri: Uri) {
+
+    }
 
 
     override fun onJournalItemFragmentInteraction(uri: Uri) {
@@ -47,7 +52,7 @@ class DetailFragmentActivity : AppCompatActivity(),
         var selectedFragment: Fragment? = null
         when (it.itemId) {
             R.id.navigation_combo_view -> {
-//                selectedFragment = TestFrag()
+                selectedFragment = ComboViewDetailFragment()
             }
             R.id.navigation_journal_entries -> {
                 selectedFragment = JournalItemDetailFragment()
