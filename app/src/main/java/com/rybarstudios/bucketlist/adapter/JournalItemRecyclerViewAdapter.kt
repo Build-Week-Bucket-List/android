@@ -15,9 +15,10 @@ import com.rybarstudios.bucketlist.model.BucketItem
 import kotlinx.android.synthetic.main.layout_journal_item.view.*
 
 class JournalItemRecyclerViewAdapter (
-    val journalList: MutableList<String>,
-    private val listener: JournalItemListFragment.OnJournalItemListFragmentInteractionListener):
-    RecyclerView.Adapter<JournalItemRecyclerViewAdapter.ViewHolder>() {
+    val data: MutableList<BucketItem>,
+    private val listener: JournalItemListFragment.OnJournalItemListFragmentInteractionListener
+) : RecyclerView.Adapter<JournalItemRecyclerViewAdapter.ViewHolder>() {
+
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
      * an item.
@@ -54,7 +55,7 @@ class JournalItemRecyclerViewAdapter (
      * @return The total number of items in this adapter.
      */
     override fun getItemCount(): Int {
-        return journalList.size
+        return data.size
     }
 
     /**
@@ -79,15 +80,15 @@ class JournalItemRecyclerViewAdapter (
      * @param position The position of the item within the adapter's data set.
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.name.text = journalList[position]
+        holder.name.text = data[position].name
         holder.journalCard.setOnClickListener {
             //launch fragment journal item detail here
             val journalEntry = JournalItemDetailFragment()
             val bundle = Bundle()
-            bundle.putSerializable(FRAGMENT_KEY, journalList[position])
+            bundle.putSerializable(FRAGMENT_KEY, data[position])
 
             if (listener != null) {
-                listener.onJournalItemListFragmentInteraction(BucketItem("name", "desc", journalList, false, 1))
+                listener.onJournalItemListFragmentInteraction(data[position])
             }
         }
     }
