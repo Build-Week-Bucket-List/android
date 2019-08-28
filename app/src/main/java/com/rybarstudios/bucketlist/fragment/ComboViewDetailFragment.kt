@@ -3,11 +3,15 @@ package com.rybarstudios.bucketlist.fragment
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.core.view.marginStart
 
 import com.rybarstudios.bucketlist.R
 import kotlinx.android.synthetic.main.fragment_combo_view_detail.*
@@ -50,17 +54,31 @@ class ComboViewDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        for (i in 0 until PhotoGalleryDetailFragment.imageList.size - 1) {
-            horizontal_scroll_view.addView(generateImageView(PhotoGalleryDetailFragment.imageList[i]), i)
+        for (i in 0 until PhotoGalleryDetailFragment.imageList.size) {
+            horizontal_scroll_view_linear_layout.addView(generateImageView(PhotoGalleryDetailFragment.imageList[i]), i)
+        }
+
+        for (i in 0 until 4) {
+            combo_view_scroll_view_linear_layout.addView(generateTextView("Test"))
         }
 
 
     }
 
     private fun generateImageView(imageSrc: Uri) : ImageView {
-        val view = ImageView(context)
-        view.setImageURI(imageSrc)
-        return view
+        val imageView = ImageView(context)
+        imageView.setImageURI(imageSrc)
+        imageView.adjustViewBounds = true
+        return imageView
+    }
+
+    private fun generateTextView(title: String) : TextView {
+        val textView = TextView(context)
+        textView.text = title
+        textView.textSize = 18f
+        textView.gravity = Gravity.CENTER
+
+        return textView
     }
 
     // TODO: Rename method, update argument and hook method into UI event
