@@ -17,6 +17,7 @@ class BucketListFragmentActivity : AppCompatActivity(),
 
     companion object {
         const val FRAGMENT_KEY = "P98AINSDKFIUH09O12U3FIUH"
+        const val FRAGMENT_KEY_2 = "P098IH90F218HQUHS0DFGUH"
         const val DETAIL_INTENT_KEY = "DETAIL_INTENT_KEY"
     }
 
