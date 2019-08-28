@@ -61,6 +61,7 @@ class PhotoGalleryDetailFragment : Fragment() {
             layoutManager = GridLayoutManager(context, 2)
             adapter = PhotoGalleryDetailAdapter(imageList)
         }
+        photo_gallery_detail_recycler_view.layoutManager?.generateDefaultLayoutParams()
 
         photo_gallery_detail_floatingActionButton.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
