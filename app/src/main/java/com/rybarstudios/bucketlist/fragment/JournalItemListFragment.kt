@@ -34,7 +34,7 @@ class JournalItemListFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
+    private var listener: OnJournalItemListFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,12 +78,12 @@ class JournalItemListFragment : Fragment() {
 
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(item: BucketItem) {
-        listener?.onFragmentInteraction(item)
+        listener?.onJournalItemListFragmentInteraction(item)
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
+        if (context is OnJournalItemListFragmentInteractionListener) {
             listener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
@@ -106,9 +106,9 @@ class JournalItemListFragment : Fragment() {
      * (http://developer.android.com/training/basics/fragments/communicating.html)
      * for more information.
      */
-    interface OnFragmentInteractionListener {
+    interface OnJournalItemListFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onFragmentInteraction(item: BucketItem)
+        fun onJournalItemListFragmentInteraction(item: BucketItem)
     }
 
     companion object {
