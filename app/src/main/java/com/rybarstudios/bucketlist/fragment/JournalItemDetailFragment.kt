@@ -1,5 +1,6 @@
 package com.rybarstudios.bucketlist.fragment
 
+import android.app.Activity
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
@@ -8,9 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.rybarstudios.bucketlist.R
+import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY
 import com.rybarstudios.bucketlist.adapter.JournalItemRecyclerViewAdapter
+import com.rybarstudios.bucketlist.model.BucketItem
+import kotlinx.android.synthetic.main.fragment_journal_item_detail.*
 import kotlinx.android.synthetic.main.fragment_journal_item_list.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -32,7 +35,8 @@ class JournalItemDetailFragment : Fragment() {
     private var param2: String? = null
     private var listener: OnJournalItemFragmentInteractionListener? = null
 
-    val journalList = mutableListOf<String>("blah", "blah2", "blah3")
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,28 +52,19 @@ class JournalItemDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_journal_item_list, container, false)
+        return inflater.inflate(R.layout.fragment_journal_item_detail, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-        journal_item_list.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context)
-            adapter = JournalItemRecyclerViewAdapter(journalList)
-        }
-
-        button_add_journal_entry.setOnClickListener {
-
-        }
+        val item = arguments?.getSerializable(FRAGMENT_KEY) as BucketItem
+        (context as Activity).journal_entry_detail_title.setText(item.name)
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onJournalItemFragmentInteraction(uri)
+    fun onButtonPressed(item: BucketItem) {
+        listener?.onJournalItemFragmentInteraction(item)
     }
 
     override fun onAttach(context: Context) {
@@ -99,7 +94,7 @@ class JournalItemDetailFragment : Fragment() {
      */
     interface OnJournalItemFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onJournalItemFragmentInteraction(uri: Uri)
+        fun onJournalItemFragmentInteraction(item: BucketItem)
     }
 
     companion object {
