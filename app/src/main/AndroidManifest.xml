@@ -13,8 +13,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.DetailFragmentActivity"
-            android:label="@string/title_activity_detail_fragment"></activity>
-        <activity android:name=".activity.BucketListFragmentActivity" />
+            android:label="@string/title_activity_detail_fragment"/>
+        <activity android:name=".activity.BucketListFragmentActivity" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
