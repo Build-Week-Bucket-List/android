@@ -9,6 +9,7 @@ import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.DETAIL_INTENT_KEY
 import com.rybarstudios.bucketlist.fragment.ComboViewDetailFragment
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY
+import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY_2
 import com.rybarstudios.bucketlist.fragment.JournalItemDetailFragment
 import com.rybarstudios.bucketlist.fragment.JournalItemListFragment
 import com.rybarstudios.bucketlist.fragment.PhotoGalleryDetailFragment
@@ -31,10 +32,11 @@ class DetailFragmentActivity : AppCompatActivity(),
             .commit()
     }
 
-    override fun onJournalItemListFragmentInteraction(item: BucketItem) {
+    override fun onJournalItemListFragmentInteraction(item: BucketItem, journalEntryIndex: Int) {
         val listItem = JournalItemDetailFragment()
         val bundle = Bundle()
         bundle.putSerializable(FRAGMENT_KEY, item)
+        bundle.putSerializable(FRAGMENT_KEY_2, journalEntryIndex)
         listItem.arguments = bundle
 
         supportFragmentManager.beginTransaction()

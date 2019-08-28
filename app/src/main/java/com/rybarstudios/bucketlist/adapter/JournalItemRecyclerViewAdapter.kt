@@ -1,6 +1,5 @@
 package com.rybarstudios.bucketlist.adapter
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,16 +7,16 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.rybarstudios.bucketlist.R
-import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY
-import com.rybarstudios.bucketlist.fragment.JournalItemDetailFragment
 import com.rybarstudios.bucketlist.fragment.JournalItemListFragment
 import com.rybarstudios.bucketlist.model.BucketItem
 import kotlinx.android.synthetic.main.layout_journal_item.view.*
 
-class JournalItemRecyclerViewAdapter (
-    val data: MutableList<BucketItem>,
+class JournalItemRecyclerViewAdapter(
+    private val data: BucketItem,
     private val listener: JournalItemListFragment.OnJournalItemListFragmentInteractionListener
 ) : RecyclerView.Adapter<JournalItemRecyclerViewAdapter.ViewHolder>() {
+
+    private val journalTitle = data.journalEntryTitle
 
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
@@ -44,7 +43,8 @@ class JournalItemRecyclerViewAdapter (
      */
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val viewGroup = LayoutInflater.from(parent.context).inflate(R.layout.layout_journal_item, parent, false)
+        val viewGroup =
+            LayoutInflater.from(parent.context).inflate(R.layout.layout_journal_item, parent, false)
         return ViewHolder(viewGroup)
 
     }
@@ -55,7 +55,7 @@ class JournalItemRecyclerViewAdapter (
      * @return The total number of items in this adapter.
      */
     override fun getItemCount(): Int {
-        return data.size
+        return journalTitle?.size ?: 0
     }
 
     /**
@@ -79,21 +79,19 @@ class JournalItemRecyclerViewAdapter (
      * item at the given position in the data set.
      * @param position The position of the item within the adapter's data set.
      */
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.name.text = data[position].name
-        holder.journalCard.setOnClickListener {
-            //launch fragment journal item detail here
-            val journalEntry = JournalItemDetailFragment()
-            val bundle = Bundle()
-            bundle.putSerializable(FRAGMENT_KEY, data[position])
+    override fun onBindViewHolder(holder: ViewHolder, journalEntryIndex: Int) {
+        if (journalTitle != null && data.journalEntry != null) {
+            // Set Journal CardView's name ET field
+            holder.name.setText(journalTitle[journalEntryIndex])
 
-            if (listener != null) {
-                listener.onJournalItemListFragmentInteraction(data[position])
+            // On Click Listener for that journal entry
+            holder.journalCard.setOnClickListener {
+                    listener.onJournalItemListFragmentInteraction(data, journalEntryIndex)
             }
         }
     }
 
-    class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.journal_entry_title
         val journalCard: CardView = view.journal_parent_card
     }
