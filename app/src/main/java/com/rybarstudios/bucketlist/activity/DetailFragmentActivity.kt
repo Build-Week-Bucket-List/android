@@ -10,8 +10,10 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.rybarstudios.bucketlist.R
+import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.DETAIL_INTENT_KEY
 import com.rybarstudios.bucketlist.fragment.JournalItemDetailFragment
 import com.rybarstudios.bucketlist.fragment.PhotoGalleryDetailFragment
+import com.rybarstudios.bucketlist.model.BucketItem
 
 class DetailFragmentActivity : AppCompatActivity(),
     JournalItemDetailFragment.OnJournalItemFragmentInteractionListener,
@@ -34,6 +36,10 @@ class DetailFragmentActivity : AppCompatActivity(),
 
         val bottomNavigation: BottomNavigationView? = findViewById(R.id.nav_view)
         bottomNavigation?.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
+        var bundle: Bundle? = intent.extras
+        var bucketItem = bundle?.getSerializable(DETAIL_INTENT_KEY) as BucketItem
+
 
     }
 

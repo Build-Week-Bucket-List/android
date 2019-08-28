@@ -34,6 +34,7 @@ class JournalItemDetailFragment : Fragment() {
 
     val journalList = mutableListOf<String>("blah", "blah2", "blah3")
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -52,6 +53,8 @@ class JournalItemDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
 
         journal_item_list.apply {
             setHasFixedSize(true)
