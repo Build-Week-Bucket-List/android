@@ -1,13 +1,13 @@
 package com.rybarstudios.bucketlist.fragment
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 
 import com.rybarstudios.bucketlist.R
@@ -60,6 +60,9 @@ class BucketItemAddFragment : Fragment() {
 
         val item = arguments?.getSerializable(FRAGMENT_KEY) as BucketItem
 
+        // Draw out the keyboard and focus on bucket list name ET field
+        openSoftKeyboard(context, et_bucket_list_name)
+
         et_bucket_list_name.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
                 et_bucket_list_description.requestFocus()
@@ -90,6 +93,12 @@ class BucketItemAddFragment : Fragment() {
             }
             false
         })
+    }
+
+    fun openSoftKeyboard(context: Context?, view: View) {
+        view.requestFocus()
+        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
     }
 
     override fun onAttach(context: Context) {

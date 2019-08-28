@@ -2,20 +2,17 @@ package com.rybarstudios.bucketlist.fragment
 
 import android.app.Activity
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.view.inputmethod.InputMethodManager
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY_2
-import com.rybarstudios.bucketlist.adapter.JournalItemRecyclerViewAdapter
 import com.rybarstudios.bucketlist.model.BucketItem
 import kotlinx.android.synthetic.main.fragment_journal_item_detail.*
-import kotlinx.android.synthetic.main.fragment_journal_item_list.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -57,11 +54,21 @@ class JournalItemDetailFragment : Fragment() {
 
         val item = arguments?.getSerializable(FRAGMENT_KEY) as BucketItem
         val journalEntryIndex = arguments?.getSerializable(FRAGMENT_KEY_2) as Int
-        (context as Activity).journal_item_detail_title.setText(item.journalEntryTitle!![journalEntryIndex])
-        (context as Activity).journal_item_detail_entry.setText(item.journalEntry!![journalEntryIndex])
+        if (item.journalEntryTitle[journalEntryIndex] != "New Entry") {
+            (context as Activity).journal_item_detail_title.setText(item.journalEntryTitle[journalEntryIndex])
+            openSoftKeyboard(context, journal_item_detail_title)
+        } else {
+            openSoftKeyboard(context, journal_item_detail_entry)
+        }
+        (context as Activity).journal_item_detail_entry.setText(item.journalEntry[journalEntryIndex])
+
     }
 
-
+    private fun openSoftKeyboard(context: Context?, view: View) {
+        view.requestFocus()
+        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+    }
 
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(item: BucketItem) {

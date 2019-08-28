@@ -7,23 +7,26 @@
     android:layout_marginTop="32dp"
     android:layout_marginStart="32dp"
     android:layout_marginEnd="32dp"
-    android:layout_marginBottom="80dp"
+    android:layout_marginBottom="96dp"
     android:background="@color/colorPrimary"
     tools:context=".fragment.JournalItemDetailFragment">
 
     <LinearLayout
         android:orientation="vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <EditText
             android:id="@+id/journal_item_detail_title"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:singleLine="true"
-            android:hint="Journal Entry Title"
-            android:text="Title" />
+            android:hint="Title" />
 
         <EditText
             android:hint="Journal Entry"
