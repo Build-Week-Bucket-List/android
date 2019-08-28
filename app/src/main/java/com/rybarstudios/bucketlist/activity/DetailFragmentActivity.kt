@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.DETAIL_INTENT_KEY
+import com.rybarstudios.bucketlist.fragment.ComboViewDetailFragment
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY
 import com.rybarstudios.bucketlist.fragment.BucketItemListFragment
 import com.rybarstudios.bucketlist.fragment.JournalItemDetailFragment
@@ -21,6 +22,12 @@ import com.rybarstudios.bucketlist.model.BucketItem
 class DetailFragmentActivity : AppCompatActivity(),
     JournalItemDetailFragment.OnJournalItemFragmentInteractionListener,
     PhotoGalleryDetailFragment.PhotoGalleryOnFragmentInteractionListener,
+
+    ComboViewDetailFragment.ComboViewOnFragmentInteractionListener{
+    override fun onComboViewFragmentInteraction(uri: Uri) {
+
+    }
+
     JournalItemListFragment.OnFragmentInteractionListener{
 
 
@@ -35,8 +42,6 @@ class DetailFragmentActivity : AppCompatActivity(),
             .addToBackStack(null)
             .commit()
 
-
-
     }
 
 
@@ -47,7 +52,6 @@ class DetailFragmentActivity : AppCompatActivity(),
     override fun onPhotoGalleryFragmentInteraction(uri: Uri) {
 
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,10 +71,9 @@ class DetailFragmentActivity : AppCompatActivity(),
         fragmentBundle.putSerializable(FRAGMENT_KEY, bucketItem)
         fragmentList.arguments = fragmentBundle
 
-        supportFragmentManager.beginTransaction()                           //this just calls fragment manager, .beginTransaction starts builder process
+        supportFragmentManager.beginTransaction()      //this just calls fragment manager, .beginTransaction starts builder process
             .replace(R.id.bottom_nav_container, fragmentList)
             .commit()
-
 
     }
 
@@ -78,7 +81,7 @@ class DetailFragmentActivity : AppCompatActivity(),
         var selectedFragment: Fragment? = null
         when (it.itemId) {
             R.id.navigation_combo_view -> {
-//                selectedFragment = TestFrag()
+                selectedFragment = ComboViewDetailFragment()
             }
             R.id.navigation_journal_entries -> {
                 selectedFragment = JournalItemDetailFragment()

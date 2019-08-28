@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY
 import com.rybarstudios.bucketlist.adapter.JournalItemRecyclerViewAdapter
@@ -39,6 +38,7 @@ class JournalItemDetailFragment : Fragment() {
 
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -59,11 +59,8 @@ class JournalItemDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val item = arguments?.getSerializable(FRAGMENT_KEY) as BucketItem
-
         (context as Activity).journal_entry_detail_title.setText(item.name)
     }
-
-
 
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(item: BucketItem) {
