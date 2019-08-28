@@ -73,7 +73,7 @@ class BucketItemAddFragment : Fragment() {
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
 
                 // Bucket List Name is required
-                if (et_bucket_list_name != null) {
+                if (et_bucket_list_name.text.toString() != "") {
                     item.name = et_bucket_list_name.text.toString()
                     item.description = et_bucket_list_description.text.toString()
                     listener?.onBucketItemAddFragmentInteraction(item)
