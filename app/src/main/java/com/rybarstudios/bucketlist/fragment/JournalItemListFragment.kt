@@ -61,24 +61,15 @@ class JournalItemListFragment : Fragment() {
         bucket_list_item_name.setText(item.name)
         bucket_list_item_description.setText(item.description)
 
-
-
         journal_item_list.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
-            adapter = JournalItemRecyclerViewAdapter(item.JournalEntry, listener!!)
+            adapter = JournalItemRecyclerViewAdapter(item, listener!!)
         }
 
         button_add_journal_entry.setOnClickListener {
 
         }
-    }
-
-
-
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(item: BucketItem) {
-        listener?.onJournalItemListFragmentInteraction(item)
     }
 
     override fun onAttach(context: Context) {
@@ -108,7 +99,7 @@ class JournalItemListFragment : Fragment() {
      */
     interface OnJournalItemListFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onJournalItemListFragmentInteraction(item: BucketItem)
+        fun onJournalItemListFragmentInteraction(item: BucketItem, journalEntryIndex: Int)
     }
 
     companion object {

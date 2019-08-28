@@ -1,16 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/journal_item_detail_fragment_holder"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.JournalItemDetailFragment"
-    android:id="@+id/journal_item_detail_fragment_holder">
+    android:layout_marginTop="32dp"
+    android:layout_marginStart="32dp"
+    android:layout_marginEnd="32dp"
+    android:layout_marginBottom="80dp"
+    android:background="@color/colorPrimary"
+    tools:context=".fragment.JournalItemDetailFragment">
 
-
-    <EditText
-        android:id="@+id/journal_entry_detail_title"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/journal_item_detail_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:singleLine="true"
+            android:hint="Journal Entry Title"
+            android:text="Title" />
+
+        <EditText
+            android:hint="Journal Entry"
+            android:id="@+id/journal_item_detail_entry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
 </FrameLayout>

@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY
+import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY_2
 import com.rybarstudios.bucketlist.adapter.JournalItemRecyclerViewAdapter
 import com.rybarstudios.bucketlist.model.BucketItem
 import kotlinx.android.synthetic.main.fragment_journal_item_detail.*
@@ -35,10 +36,6 @@ class JournalItemDetailFragment : Fragment() {
     private var param2: String? = null
     private var listener: OnJournalItemFragmentInteractionListener? = null
 
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -59,8 +56,12 @@ class JournalItemDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val item = arguments?.getSerializable(FRAGMENT_KEY) as BucketItem
-        (context as Activity).journal_entry_detail_title.setText(item.name)
+        val journalEntryIndex = arguments?.getSerializable(FRAGMENT_KEY_2) as Int
+        (context as Activity).journal_item_detail_title.setText(item.journalEntryTitle!![journalEntryIndex])
+        (context as Activity).journal_item_detail_entry.setText(item.journalEntry!![journalEntryIndex])
     }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(item: BucketItem) {
