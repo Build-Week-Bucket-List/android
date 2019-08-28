@@ -22,14 +22,11 @@ import com.rybarstudios.bucketlist.model.BucketItem
 class DetailFragmentActivity : AppCompatActivity(),
     JournalItemDetailFragment.OnJournalItemFragmentInteractionListener,
     PhotoGalleryDetailFragment.PhotoGalleryOnFragmentInteractionListener,
-
+    JournalItemListFragment.OnFragmentInteractionListener,
     ComboViewDetailFragment.ComboViewOnFragmentInteractionListener{
     override fun onComboViewFragmentInteraction(uri: Uri) {
 
     }
-
-    JournalItemListFragment.OnFragmentInteractionListener{
-
 
     override fun onFragmentInteraction(item: BucketItem) {
         val listItem = JournalItemDetailFragment()
