@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.rybarstudios.bucketlist">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,8 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".activity.FullscreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_fullscreen"
+            android:theme="@style/FullscreenTheme"></activity>
+        <activity
             android:name=".activity.DetailFragmentActivity"
-            android:label="@string/title_activity_detail_fragment"></activity>
+            android:label="@string/title_activity_detail_fragment" />
         <activity android:name=".activity.BucketListFragmentActivity" />
         <activity android:name=".activity.LoginActivity">
             <intent-filter>

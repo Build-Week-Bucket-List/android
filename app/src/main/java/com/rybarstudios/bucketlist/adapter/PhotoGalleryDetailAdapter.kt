@@ -1,5 +1,8 @@
 package com.rybarstudios.bucketlist.adapter
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.rybarstudios.bucketlist.R
+import com.rybarstudios.bucketlist.activity.FullscreenActivity
 import kotlinx.android.synthetic.main.photo_gallery_detail_item.view.*
 
 class PhotoGalleryDetailAdapter(val imageList: MutableList<Uri>) : RecyclerView.Adapter<PhotoGalleryDetailAdapter.ViewHolder>() {
@@ -22,6 +26,11 @@ class PhotoGalleryDetailAdapter(val imageList: MutableList<Uri>) : RecyclerView.
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val image = imageList[position]
         holder.image.setImageURI(image)
+        holder.image.setOnClickListener {
+            val intent = Intent(holder.image.context, FullscreenActivity::class.java)
+            intent.putExtra("object", imageList[position].toString())
+            (holder.image.context as Activity).startActivity(intent)
+        }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
