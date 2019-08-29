@@ -1,6 +1,7 @@
 package com.rybarstudios.bucketlist.adapter
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Animatable
@@ -63,6 +64,26 @@ class BucketItemRecyclerViewAdapter(
             val detailIntent = Intent(context, DetailFragmentActivity::class.java)
             detailIntent.putExtra(DETAIL_INTENT_KEY, data[position])
             (context as Activity).startActivity(detailIntent)
+        }
+
+        holder.itemCard.setOnLongClickListener {
+
+            val builder = AlertDialog.Builder(context)
+
+            builder.setTitle("Delete Item")
+            builder.setMessage("Are you sure you want to delete this Bucket List Item?")
+            builder.setPositiveButton("YES"){ dialog, which ->
+                // Toast.makeText(context, "Image Deleted", Toast.LENGTH_SHORT).show()
+                data.removeAt(position)
+                notifyDataSetChanged()
+            }
+
+            builder.setNegativeButton("No"){_, _ -> }
+
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+
+            true
         }
 
         //declaring avd images
