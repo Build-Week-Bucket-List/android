@@ -14,6 +14,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.DETAIL_INTENT_KEY
+import com.rybarstudios.bucketlist.activity.DetailActivity
 import com.rybarstudios.bucketlist.activity.DetailFragmentActivity
 import com.rybarstudios.bucketlist.fragment.BucketItemListFragment
 import com.rybarstudios.bucketlist.model.BucketItem
@@ -60,7 +61,7 @@ class BucketItemRecyclerViewAdapter(
 
         //Starts DetailFragmentActivity when bucketListItem is clicked -- TC
         holder.itemCard.setOnClickListener {
-            val detailIntent = Intent(context, DetailFragmentActivity::class.java)
+            val detailIntent = Intent(context, DetailActivity::class.java)
             detailIntent.putExtra(DETAIL_INTENT_KEY, data[position])
             (context as Activity).startActivity(detailIntent)
         }
