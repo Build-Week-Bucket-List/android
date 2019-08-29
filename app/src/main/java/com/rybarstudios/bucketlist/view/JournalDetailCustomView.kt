@@ -1,4 +1,4 @@
-package com.rybarstudios.bucketlist.activity
+package com.rybarstudios.bucketlist.view
 
 import android.content.Context
 import android.graphics.Canvas
@@ -7,8 +7,6 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.util.AttributeSet
 import android.widget.EditText
-import com.rybarstudios.bucketlist.R
-import java.util.jar.Attributes
 
 class JournalDetailCustomView(context: Context, attrs: AttributeSet?): EditText(context, attrs) {
 
