@@ -52,14 +52,17 @@ class JournalDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // pull in data sent from DetailFragmentActivity
         val item = arguments?.getSerializable(FRAGMENT_KEY) as BucketItem
         val journalEntryIndex = arguments?.getSerializable(FRAGMENT_KEY_2) as Int
 
+        // Logic for if the user is editing or creating a new entry, will focus on different
+        // EditText fields
         if (item.journalEntryTitle[journalEntryIndex] != "New Entry") {
             (context as Activity).et_journal_title.setText(item.journalEntryTitle[journalEntryIndex])
-            openSoftKeyboard(context, et_journal_title)
-        } else {
             openSoftKeyboard(context, et_journal_entry)
+        } else {
+            openSoftKeyboard(context, et_journal_title)
         }
         (context as Activity).et_journal_entry.setText(item.journalEntry[journalEntryIndex])
     }
