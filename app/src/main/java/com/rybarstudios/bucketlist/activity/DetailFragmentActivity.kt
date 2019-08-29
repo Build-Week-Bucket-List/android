@@ -7,32 +7,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.DETAIL_INTENT_KEY
-import com.rybarstudios.bucketlist.fragment.ComboViewDetailFragment
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY_2
-import com.rybarstudios.bucketlist.fragment.JournalItemDetailFragment
-import com.rybarstudios.bucketlist.fragment.JournalItemListFragment
-import com.rybarstudios.bucketlist.fragment.PhotoGalleryDetailFragment
+import com.rybarstudios.bucketlist.fragment.*
 import com.rybarstudios.bucketlist.model.BucketItem
 
 class DetailFragmentActivity : AppCompatActivity(),
-    JournalItemDetailFragment.OnJournalItemFragmentInteractionListener,
+    JournalItemDetailFragment.OnJournalItemDetailFragmentInteractionListener,
     PhotoGalleryDetailFragment.PhotoGalleryOnFragmentInteractionListener,
-    JournalItemListFragment.OnJournalItemListFragmentInteractionListener,
-    ComboViewDetailFragment.ComboViewOnFragmentInteractionListener{
-    override fun onComboViewFragmentInteraction(item: BucketItem) {
-        val listItem = PhotoGalleryDetailFragment()
-        val bundle = Bundle()
-        bundle.putSerializable(FRAGMENT_KEY, item)
-        listItem.arguments = bundle
+    JournalItemFragment.OnJournalItemFragmentInteractionListener,
+    ComboViewDetailFragment.ComboViewOnFragmentInteractionListener,
+    PhotoDetailFragment.OnPhotoDetailFragmentInteractionListener {
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.combo_view_detail_fragment, listItem)
-            .addToBackStack(null)
-            .commit()
-    }
-
-    override fun onJournalItemListFragmentInteraction(item: BucketItem, journalEntryIndex: Int) {
+    override fun onJournalItemFragmentInteraction(item: BucketItem, journalEntryIndex: Int) {
         val listItem = JournalItemDetailFragment()
         val bundle = Bundle()
         bundle.putSerializable(FRAGMENT_KEY, item)
@@ -46,7 +33,7 @@ class DetailFragmentActivity : AppCompatActivity(),
 
     }
 
-    override fun onJournalItemFragmentInteraction(item: BucketItem) {
+    override fun onJournalItemDetailFragmentInteraction(item: BucketItem) {
 
     }
 
@@ -58,6 +45,22 @@ class DetailFragmentActivity : AppCompatActivity(),
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.photo_gallery_detail_fragment, listItem)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    override fun onPhotoDetailFragmentInteraction(item: BucketItem, photoIndex: Int) {
+
+    }
+
+    override fun onComboViewFragmentInteraction(item: BucketItem) {
+        val listItem = PhotoGalleryDetailFragment()
+        val bundle = Bundle()
+        bundle.putSerializable(FRAGMENT_KEY, item)
+        listItem.arguments = bundle
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.combo_view_detail_fragment, listItem)
             .addToBackStack(null)
             .commit()
     }
@@ -75,7 +78,7 @@ class DetailFragmentActivity : AppCompatActivity(),
         val bucketItem = bundle?.getSerializable(DETAIL_INTENT_KEY) as BucketItem
 
         //inflate journal list in onCreate
-        val fragmentList = JournalItemListFragment()
+        val fragmentList = JournalItemFragment()
         val fragmentBundle = Bundle()
         fragmentBundle.putSerializable(FRAGMENT_KEY, bucketItem)
         fragmentList.arguments = fragmentBundle

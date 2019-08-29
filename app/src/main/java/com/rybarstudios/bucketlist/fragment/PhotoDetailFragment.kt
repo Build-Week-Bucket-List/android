@@ -3,19 +3,13 @@ package com.rybarstudios.bucketlist.fragment
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.rybarstudios.bucketlist.R
-import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY
-import com.rybarstudios.bucketlist.adapter.JournalItemRecyclerViewAdapter
 import com.rybarstudios.bucketlist.model.BucketItem
-import kotlinx.android.synthetic.main.fragment_journal_item_list.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,16 +19,16 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [JournalListItemFragment.OnFragmentInteractionListener] interface
+ * [PhotoDetailFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [JournalListItemFragment.newInstance] factory method to
+ * Use the [PhotoDetailFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class JournalItemListFragment : Fragment() {
+class PhotoDetailFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var listener: OnJournalItemListFragmentInteractionListener? = null
+    private var listener: OnPhotoDetailFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +36,6 @@ class JournalItemListFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
     }
 
     override fun onCreateView(
@@ -50,34 +43,17 @@ class JournalItemListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_journal_item_list, container, false)
+        return inflater.inflate(R.layout.fragment_photo_detail, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val item = arguments?.getSerializable(FRAGMENT_KEY) as BucketItem
-
-        bucket_list_item_name.setText(item.name)
-        bucket_list_item_description.setText(item.description)
-
-        journal_item_list.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context)
-            adapter = JournalItemRecyclerViewAdapter(item, listener!!)
-        }
-
-        button_add_journal_entry.setOnClickListener {
-            val journalEntryIndex = item.journalEntryTitle.size
-            item.journalEntryTitle.add("New Entry")
-            item.journalEntry.add("")
-            journal_item_list.adapter?.notifyItemInserted(journalEntryIndex)
-        }
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnJournalItemListFragmentInteractionListener) {
+        if (context is OnPhotoDetailFragmentInteractionListener) {
             listener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
@@ -100,9 +76,9 @@ class JournalItemListFragment : Fragment() {
      * (http://developer.android.com/training/basics/fragments/communicating.html)
      * for more information.
      */
-    interface OnJournalItemListFragmentInteractionListener {
+    interface OnPhotoDetailFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onJournalItemListFragmentInteraction(item: BucketItem, journalEntryIndex: Int)
+        fun onPhotoDetailFragmentInteraction(item: BucketItem, photoIndex: Int)
     }
 
     companion object {
@@ -112,12 +88,12 @@ class JournalItemListFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment JournalListItemFragment.
+         * @return A new instance of fragment PhotoDetailFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            JournalItemListFragment().apply {
+            PhotoDetailFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

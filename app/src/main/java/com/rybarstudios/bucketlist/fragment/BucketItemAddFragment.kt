@@ -95,7 +95,7 @@ class BucketItemAddFragment : Fragment() {
         })
     }
 
-    fun openSoftKeyboard(context: Context?, view: View) {
+    private fun openSoftKeyboard(context: Context?, view: View) {
         view.requestFocus()
         val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)

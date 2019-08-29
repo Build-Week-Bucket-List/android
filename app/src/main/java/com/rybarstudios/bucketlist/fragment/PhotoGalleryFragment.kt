@@ -9,14 +9,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity
 import com.rybarstudios.bucketlist.adapter.PhotoGalleryDetailAdapter
 import com.rybarstudios.bucketlist.model.BucketItem
-import kotlinx.android.synthetic.main.fragment_photo_gallery_detail.*
+import kotlinx.android.synthetic.main.fragment_photo_gallery.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -51,7 +50,7 @@ class PhotoGalleryDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_photo_gallery_detail, container, false)
+        return inflater.inflate(R.layout.fragment_photo_gallery, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -10,11 +10,11 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.activity.FullscreenActivity
-import kotlinx.android.synthetic.main.photo_gallery_detail_item.view.*
+import kotlinx.android.synthetic.main.layout_photo_gallery_item.view.*
 
 class PhotoGalleryDetailAdapter(val imageUri: MutableList<Uri>) : RecyclerView.Adapter<PhotoGalleryDetailAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.photo_gallery_detail_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_photo_gallery_item, parent, false)
         return ViewHolder(view)
     }
 
