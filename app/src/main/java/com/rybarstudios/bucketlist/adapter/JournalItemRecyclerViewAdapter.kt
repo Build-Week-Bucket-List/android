@@ -7,13 +7,13 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.rybarstudios.bucketlist.R
-import com.rybarstudios.bucketlist.fragment.JournalItemFragment
+import com.rybarstudios.bucketlist.fragment.JournalFragment
 import com.rybarstudios.bucketlist.model.BucketItem
 import kotlinx.android.synthetic.main.layout_journal_item.view.*
 
 class JournalItemRecyclerViewAdapter(
     private val data: BucketItem,
-    private val listener: JournalItemFragment.OnJournalItemFragmentInteractionListener
+    private val listener: JournalFragment.OnJournalFragmentInteractionListener
 ) : RecyclerView.Adapter<JournalItemRecyclerViewAdapter.ViewHolder>() {
 
     private val journalTitle = data.journalEntryTitle
@@ -85,7 +85,7 @@ class JournalItemRecyclerViewAdapter(
 
         // On Click Listener for that journal entry
         holder.journalCard.setOnClickListener {
-            listener.onJournalItemFragmentInteraction(data, journalEntryIndex)
+            listener.onJournalFragmentInteraction(data, journalEntryIndex)
         }
 
     }

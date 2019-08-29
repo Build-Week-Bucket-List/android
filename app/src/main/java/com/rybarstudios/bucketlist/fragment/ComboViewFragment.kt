@@ -29,11 +29,12 @@ private const val ARG_PARAM2 = "param2"
  * Use the [ComboViewDetailFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ComboViewDetailFragment : Fragment() {
+class ComboViewFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: ComboViewOnFragmentInteractionListener? = null
+
     var item: BucketItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,13 +58,13 @@ class ComboViewDetailFragment : Fragment() {
 
         val item = arguments?.getSerializable(BucketListFragmentActivity.FRAGMENT_KEY) as BucketItem
 
-        for (i in 0 until item.imageUri.size) {
+        /*for (i in 0 until item.imageUri.size) {
             horizontal_scroll_view_linear_layout.addView(generateImageView(item.imageUri[i]), i)
         }
 
         for (i in 0 until 4) {
             combo_view_scroll_view_linear_layout.addView(generateTextView(item.journalEntryTitle[i]))
-        }
+        }*/
 
 
     }
@@ -114,7 +115,6 @@ class ComboViewDetailFragment : Fragment() {
      * for more information.
      */
     interface ComboViewOnFragmentInteractionListener {
-        // TODO: Update argument type and name
         fun onComboViewFragmentInteraction(item: BucketItem)
     }
 
@@ -130,7 +130,7 @@ class ComboViewDetailFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            ComboViewDetailFragment().apply {
+            ComboViewFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

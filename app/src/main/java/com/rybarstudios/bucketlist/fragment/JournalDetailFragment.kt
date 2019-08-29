@@ -12,7 +12,7 @@ import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY_2
 import com.rybarstudios.bucketlist.model.BucketItem
-import kotlinx.android.synthetic.main.fragment_journal_item_detail.*
+import kotlinx.android.synthetic.main.fragment_journal_detail.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,11 +27,11 @@ private const val ARG_PARAM2 = "param2"
  * Use the [JournalItemDetailFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class JournalItemDetailFragment : Fragment() {
+class JournalDetailFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var listener: OnJournalItemDetailFragmentInteractionListener? = null
+    private var listener: OnJournalDetailFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +46,7 @@ class JournalItemDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_journal_item_detail, container, false)
+        return inflater.inflate(R.layout.fragment_journal_detail, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,12 +56,12 @@ class JournalItemDetailFragment : Fragment() {
         val journalEntryIndex = arguments?.getSerializable(FRAGMENT_KEY_2) as Int
 
         if (item.journalEntryTitle[journalEntryIndex] != "New Entry") {
-            (context as Activity).journal_item_detail_title.setText(item.journalEntryTitle[journalEntryIndex])
-            openSoftKeyboard(context, journal_item_detail_title)
+            (context as Activity).et_journal_title.setText(item.journalEntryTitle[journalEntryIndex])
+            openSoftKeyboard(context, et_journal_title)
         } else {
-            openSoftKeyboard(context, journal_item_detail_entry)
+            openSoftKeyboard(context, et_journal_entry)
         }
-        (context as Activity).journal_item_detail_entry.setText(item.journalEntry[journalEntryIndex])
+        (context as Activity).et_journal_entry.setText(item.journalEntry[journalEntryIndex])
     }
 
     private fun openSoftKeyboard(context: Context?, view: View) {
@@ -72,12 +72,12 @@ class JournalItemDetailFragment : Fragment() {
 
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(item: BucketItem) {
-        listener?.onJournalItemDetailFragmentInteraction(item)
+        listener?.onJournalDetailFragmentInteraction(item)
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnJournalItemDetailFragmentInteractionListener) {
+        if (context is OnJournalDetailFragmentInteractionListener) {
             listener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
@@ -100,9 +100,8 @@ class JournalItemDetailFragment : Fragment() {
      * (http://developer.android.com/training/basics/fragments/communicating.html)
      * for more information.
      */
-    interface OnJournalItemDetailFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onJournalItemDetailFragmentInteraction(item: BucketItem)
+    interface OnJournalDetailFragmentInteractionListener {
+        fun onJournalDetailFragmentInteraction(item: BucketItem)
     }
 
     companion object {
@@ -117,7 +116,7 @@ class JournalItemDetailFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            JournalItemDetailFragment().apply {
+            JournalDetailFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

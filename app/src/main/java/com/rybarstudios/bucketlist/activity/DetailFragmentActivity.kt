@@ -1,5 +1,7 @@
 package com.rybarstudios.bucketlist.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -11,40 +13,48 @@ import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY_2
 import com.rybarstudios.bucketlist.fragment.*
 import com.rybarstudios.bucketlist.model.BucketItem
+import kotlinx.android.synthetic.main.fragment_photo_gallery.*
 
 class DetailFragmentActivity : AppCompatActivity(),
-    JournalItemDetailFragment.OnJournalItemDetailFragmentInteractionListener,
-    PhotoGalleryDetailFragment.PhotoGalleryOnFragmentInteractionListener,
-    JournalItemFragment.OnJournalItemFragmentInteractionListener,
-    ComboViewDetailFragment.ComboViewOnFragmentInteractionListener,
+    JournalDetailFragment.OnJournalDetailFragmentInteractionListener,
+    PhotoGalleryFragment.OnPhotoGalleryFragmentInteractionListener,
+    JournalFragment.OnJournalFragmentInteractionListener,
+    ComboViewFragment.ComboViewOnFragmentInteractionListener,
     PhotoDetailFragment.OnPhotoDetailFragmentInteractionListener {
 
-    override fun onJournalItemFragmentInteraction(item: BucketItem, journalEntryIndex: Int) {
-        val listItem = JournalItemDetailFragment()
+    companion object {
+        const val IMAGE_REQUEST_CODE = 9878
+    }
+
+    private var bucketItemTop: BucketItem? = null
+
+    override fun onJournalFragmentInteraction(item: BucketItem, journalEntryIndex: Int) {
+        val journalEntry = JournalDetailFragment()
         val bundle = Bundle()
         bundle.putSerializable(FRAGMENT_KEY, item)
         bundle.putSerializable(FRAGMENT_KEY_2, journalEntryIndex)
-        listItem.arguments = bundle
+        journalEntry.arguments = bundle
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.journal_entry_detail_fragment, listItem)
+            .replace(R.id.detail_fragment_holder, journalEntry)
             .addToBackStack(null)
             .commit()
+    }
+
+    override fun onJournalDetailFragmentInteraction(item: BucketItem) {
 
     }
 
-    override fun onJournalItemDetailFragmentInteraction(item: BucketItem) {
+    override fun onPhotoGalleryFragmentInteraction(item: BucketItem, imageIndex: Int) {
+        val imageItem = PhotoDetailFragment()
 
-    }
-
-    override fun onPhotoGalleryFragmentInteraction(item: BucketItem) {
-        val listItem = PhotoGalleryDetailFragment()
         val bundle = Bundle()
         bundle.putSerializable(FRAGMENT_KEY, item)
-        listItem.arguments = bundle
+        bundle.putSerializable(FRAGMENT_KEY_2, imageIndex)
+        imageItem.arguments = bundle
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.photo_gallery_detail_fragment, listItem)
+            .replace(R.id.detail_fragment_holder, imageItem)
             .addToBackStack(null)
             .commit()
     }
@@ -54,13 +64,14 @@ class DetailFragmentActivity : AppCompatActivity(),
     }
 
     override fun onComboViewFragmentInteraction(item: BucketItem) {
-        val listItem = PhotoGalleryDetailFragment()
+        val listItem = PhotoGalleryFragment()
+
         val bundle = Bundle()
         bundle.putSerializable(FRAGMENT_KEY, item)
         listItem.arguments = bundle
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.combo_view_detail_fragment, listItem)
+            .replace(R.id.fragment_holder, listItem)
             .addToBackStack(null)
             .commit()
     }
@@ -69,41 +80,54 @@ class DetailFragmentActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_fragment)
 
+        //catch data from bucket recyclerview
+        val bundle: Bundle? = intent.extras
+        val bucketItem = bundle?.getSerializable(DETAIL_INTENT_KEY) as BucketItem
+        bucketItemTop = bucketItem
 
         val bottomNavigation: BottomNavigationView? = findViewById(R.id.nav_view)
         bottomNavigation?.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        //catch data from bucket recyclerview
-        val bundle: Bundle? = intent.extras
-        val bucketItem = bundle?.getSerializable(DETAIL_INTENT_KEY) as BucketItem
-
         //inflate journal list in onCreate
-        val fragmentList = JournalItemFragment()
+        val fragmentList = JournalFragment()
         val fragmentBundle = Bundle()
         fragmentBundle.putSerializable(FRAGMENT_KEY, bucketItem)
         fragmentList.arguments = fragmentBundle
 
         supportFragmentManager.beginTransaction()      //this just calls fragment manager, .beginTransaction starts builder process
-            .replace(R.id.journal_entry_list_fragment, fragmentList)
+            .replace(R.id.fragment_holder, fragmentList)
             .commit()
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            val photoUri: Uri? = data?.data
+            if (photoUri != null) {
+                bucketItemTop!!.imageUri.add(photoUri)
+                photo_gallery_detail_recycler_view.adapter?.notifyItemInserted(bucketItemTop!!.imageUri.size)
+            }
+        }
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
         var selectedFragment: Fragment? = null
         when (it.itemId) {
             R.id.navigation_combo_view -> {
-                selectedFragment = ComboViewDetailFragment()
+                selectedFragment = ComboViewFragment()
             }
             R.id.navigation_journal_entries -> {
-                selectedFragment = JournalItemDetailFragment()
+                selectedFragment = JournalFragment()
             }
             R.id.navigation_photo_gallery -> {
-                selectedFragment = PhotoGalleryDetailFragment()
+                selectedFragment = PhotoGalleryFragment()
             }
         }
         selectedFragment?.let { it1 ->
-            supportFragmentManager.beginTransaction().replace(R.id.journal_entry_list_fragment,
+            val fragmentBundle = Bundle()
+            fragmentBundle.putSerializable(FRAGMENT_KEY, bucketItemTop)
+            selectedFragment.arguments = fragmentBundle
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_holder,
                 it1
             ).commit()
         }

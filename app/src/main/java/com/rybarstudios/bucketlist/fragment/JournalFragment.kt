@@ -12,7 +12,7 @@ import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY
 import com.rybarstudios.bucketlist.adapter.JournalItemRecyclerViewAdapter
 import com.rybarstudios.bucketlist.model.BucketItem
-import kotlinx.android.synthetic.main.fragment_journal_item.*
+import kotlinx.android.synthetic.main.fragment_journal.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,11 +27,11 @@ private const val ARG_PARAM2 = "param2"
  * Use the [JournalListItemFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class JournalItemFragment : Fragment() {
+class JournalFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var listener: OnJournalItemFragmentInteractionListener? = null
+    private var listener: OnJournalFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +47,7 @@ class JournalItemFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_journal_item, container, false)
+        return inflater.inflate(R.layout.fragment_journal, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -74,7 +74,7 @@ class JournalItemFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnJournalItemFragmentInteractionListener) {
+        if (context is OnJournalFragmentInteractionListener) {
             listener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
@@ -97,9 +97,8 @@ class JournalItemFragment : Fragment() {
      * (http://developer.android.com/training/basics/fragments/communicating.html)
      * for more information.
      */
-    interface OnJournalItemFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onJournalItemFragmentInteraction(item: BucketItem, journalEntryIndex: Int)
+    interface OnJournalFragmentInteractionListener {
+        fun onJournalFragmentInteraction(item: BucketItem, journalEntryIndex: Int)
     }
 
     companion object {
@@ -114,7 +113,7 @@ class JournalItemFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            JournalItemFragment().apply {
+            JournalFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

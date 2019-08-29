@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.rybarstudios.bucketlist.R
+import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity
 import com.rybarstudios.bucketlist.model.BucketItem
 
 // TODO: Rename parameter arguments, choose names that match
@@ -48,6 +49,10 @@ class PhotoDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val item = arguments?.getSerializable(BucketListFragmentActivity.FRAGMENT_KEY) as BucketItem
+        val photoIndex = arguments?.getSerializable(BucketListFragmentActivity.FRAGMENT_KEY_2) as Int
+
 
     }
 

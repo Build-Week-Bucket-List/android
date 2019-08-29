@@ -13,7 +13,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity
-import com.rybarstudios.bucketlist.adapter.PhotoGalleryDetailAdapter
+import com.rybarstudios.bucketlist.activity.DetailFragmentActivity.Companion.IMAGE_REQUEST_CODE
+import com.rybarstudios.bucketlist.adapter.PhotoGalleryRecyclerViewAdapter
 import com.rybarstudios.bucketlist.model.BucketItem
 import kotlinx.android.synthetic.main.fragment_photo_gallery.*
 
@@ -30,11 +31,12 @@ private const val ARG_PARAM2 = "param2"
  * Use the [PhotoGalleryDetailFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PhotoGalleryDetailFragment : Fragment() {
+class PhotoGalleryFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var listener: PhotoGalleryOnFragmentInteractionListener? = null
+    private var listener: OnPhotoGalleryFragmentInteractionListener? = null
+
     var item: BucketItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,7 +63,7 @@ class PhotoGalleryDetailFragment : Fragment() {
         photo_gallery_detail_recycler_view.apply {
             setHasFixedSize(true)
             layoutManager = GridLayoutManager(context, 2)
-            adapter = PhotoGalleryDetailAdapter(item.imageUri)
+            adapter = PhotoGalleryRecyclerViewAdapter(item, listener!!)
         }
         photo_gallery_detail_recycler_view.layoutManager?.generateDefaultLayoutParams()
 
@@ -72,29 +74,9 @@ class PhotoGalleryDetailFragment : Fragment() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
-            val photoUri: Uri? = data?.data
-            if (photoUri != null) {
-                item?.imageUri?.add(photoUri)
-                item?.imageUri?.size?.minus(1)?.let {
-                    photo_gallery_detail_recycler_view.adapter?.notifyItemInserted(
-                        it
-                    )
-                }
-            }
-        }
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(item: BucketItem) {
-        listener?.onPhotoGalleryFragmentInteraction(item)
-    }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is PhotoGalleryOnFragmentInteractionListener) {
+        if (context is OnPhotoGalleryFragmentInteractionListener) {
             listener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
@@ -117,9 +99,8 @@ class PhotoGalleryDetailFragment : Fragment() {
      * (http://developer.android.com/training/basics/fragments/communicating.html)
      * for more information.
      */
-    interface PhotoGalleryOnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onPhotoGalleryFragmentInteraction(item: BucketItem)
+    interface OnPhotoGalleryFragmentInteractionListener {
+        fun onPhotoGalleryFragmentInteraction(item: BucketItem, imageIndex: Int)
     }
 
     companion object {
@@ -132,13 +113,10 @@ class PhotoGalleryDetailFragment : Fragment() {
          * @return A new instance of fragment PhotoGalleryDetailFragment.
          */
 
-        const val IMAGE_REQUEST_CODE = 42
-
-
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            PhotoGalleryDetailFragment().apply {
+            PhotoGalleryFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
