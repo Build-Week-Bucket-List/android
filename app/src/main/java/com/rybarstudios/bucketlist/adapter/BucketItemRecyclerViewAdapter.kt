@@ -18,6 +18,7 @@ import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion
 import com.rybarstudios.bucketlist.activity.DetailFragmentActivity
 import com.rybarstudios.bucketlist.fragment.BucketItemListFragment
 import com.rybarstudios.bucketlist.model.BucketItem
+import com.rybarstudios.bucketlist.model.BucketListItem
 import kotlinx.android.synthetic.main.layout_bucket_item.view.*
 
 class BucketItemRecyclerViewAdapter(
@@ -73,8 +74,11 @@ class BucketItemRecyclerViewAdapter(
             builder.setTitle("Delete Item")
             builder.setMessage("Are you sure you want to delete this Bucket List Item?")
             builder.setPositiveButton("YES"){ dialog, which ->
-                // Toast.makeText(context, "Image Deleted", Toast.LENGTH_SHORT).show()
-                data.removeAt(position)
+                BucketListItem.bucketListItem.removeAt(position)
+                //for loop re-assigns indices so it stays in sync when you launch the detail activity
+                for(i in 0 until BucketListItem.bucketListItem.size) {
+                    BucketListItem.bucketListItem[i].indexId = i
+                }
                 notifyDataSetChanged()
             }
 
@@ -99,7 +103,7 @@ class BucketItemRecyclerViewAdapter(
 
         //listener to change animation when clicked
         holder.image.setOnClickListener {
-            if (data[position].completed) {
+            if (data[position].completed == true) { //this needs the == true or it won't keep the value when you leave and re-enter the activity, idk why
                 data[position].completed = false
                 holder.image.setImageDrawable(uncheckImage)
                 (uncheckImage as Animatable).start()
