@@ -3,15 +3,20 @@ package com.rybarstudios.bucketlist.fragment
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY_2
 import com.rybarstudios.bucketlist.model.BucketItem
+import com.rybarstudios.bucketlist.model.BucketListItem
+import kotlinx.android.synthetic.main.activity_detail_fragment.*
+import kotlinx.android.synthetic.main.fragment_journal.*
 import kotlinx.android.synthetic.main.fragment_journal_detail.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -32,6 +37,10 @@ class JournalDetailFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnJournalDetailFragmentInteractionListener? = null
+    private var originalTitle = ""
+    private var originalEntry = ""
+    private var bucketItem: BucketItem? = null
+    private var entryIndex: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +64,10 @@ class JournalDetailFragment : Fragment() {
         // pull in data sent from DetailFragmentActivity
         val item = arguments?.getSerializable(FRAGMENT_KEY) as BucketItem
         val journalEntryIndex = arguments?.getSerializable(FRAGMENT_KEY_2) as Int
+        bucketItem = item
+        entryIndex = journalEntryIndex
+        originalTitle = item.journalEntryTitle[journalEntryIndex]
+        originalEntry = item.journalEntry[journalEntryIndex]
 
         // Logic for if the user is editing or creating a new entry, will focus on different
         // EditText fields
@@ -65,6 +78,23 @@ class JournalDetailFragment : Fragment() {
             openSoftKeyboard(context, et_journal_title)
         }
         (context as Activity).et_journal_entry.setText(item.journalEntry[journalEntryIndex])
+    }
+
+    // Override back button
+    fun onBackButtonPressed() {
+        if (et_journal_title.text.toString() != originalTitle
+            || et_journal_entry.text.toString() != originalEntry) {
+            BucketListItem.bucketListItem[bucketItem!!.indexId]
+                .journalEntryTitle[entryIndex!!] = et_journal_title.text.toString()
+            BucketListItem.bucketListItem[bucketItem!!.indexId]
+                .journalEntry[entryIndex!!] = et_journal_entry.text.toString()
+            //journal_item_list.adapter?.notifyDataSetChanged()
+        }
+        // remove the fragment from view and popBackStack
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.remove(this)
+            ?.commit()
+        activity?.supportFragmentManager?.popBackStack()
     }
 
     private fun openSoftKeyboard(context: Context?, view: View) {
@@ -104,7 +134,7 @@ class JournalDetailFragment : Fragment() {
      * for more information.
      */
     interface OnJournalDetailFragmentInteractionListener {
-        fun onJournalDetailFragmentInteraction(item: BucketItem)
+        fun onJournalDetailFragmentInteraction(item: BucketItem?)
     }
 
     companion object {
