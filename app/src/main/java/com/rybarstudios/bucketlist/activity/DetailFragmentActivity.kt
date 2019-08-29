@@ -14,9 +14,7 @@ import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion
 import com.rybarstudios.bucketlist.fragment.*
 import com.rybarstudios.bucketlist.model.BucketItem
 import com.rybarstudios.bucketlist.model.BucketListItem
-import kotlinx.android.synthetic.main.fragment_bucket_item_list.*
 import kotlinx.android.synthetic.main.fragment_journal.*
-import kotlinx.android.synthetic.main.fragment_journal_detail.*
 import kotlinx.android.synthetic.main.fragment_photo_gallery.*
 
 class DetailFragmentActivity : AppCompatActivity(),
@@ -114,6 +112,7 @@ class DetailFragmentActivity : AppCompatActivity(),
         bucketItemTop = bucketItem
 
         val bottomNavigation: BottomNavigationView? = findViewById(R.id.nav_view)
+        bottomNavigation?.setOnNavigationItemReselectedListener(mOnNavigationItemReselectedListener)
         bottomNavigation?.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         //inflate journal list in onCreate
@@ -125,7 +124,8 @@ class DetailFragmentActivity : AppCompatActivity(),
         )
         fragmentList.arguments = fragmentBundle
 
-        supportFragmentManager.beginTransaction()      //this just calls fragment manager, .beginTransaction starts builder process
+        //this just calls fragment manager, .beginTransaction starts builder process
+        supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_holder, fragmentList)
             .commit()
     }
@@ -143,6 +143,30 @@ class DetailFragmentActivity : AppCompatActivity(),
             }
         }
     }
+
+    private val mOnNavigationItemReselectedListener =
+        BottomNavigationView.OnNavigationItemReselectedListener {
+        var selectedFragment: Fragment? = null
+        when (it.itemId) {
+            R.id.navigation_photo_gallery -> {
+                checkForEditedBucketItemTitle()
+                checkForEditedBucketItemDescription()
+                selectedFragment = PhotoGalleryFragment()
+            }
+        }
+            selectedFragment?.let { it1 ->
+                val fragmentBundle = Bundle()
+                fragmentBundle.putSerializable(
+                    FRAGMENT_KEY,
+                    BucketListItem.bucketListItem[bucketItemTop!!.indexId]
+                )
+                selectedFragment.arguments = fragmentBundle
+                supportFragmentManager.beginTransaction().replace(
+                    R.id.fragment_holder,
+                    it1
+                ).commit()
+            }
+        }
 
     private val mOnNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener {

@@ -76,4 +76,9 @@ class BucketListFragmentActivity : AppCompatActivity(),
             .replace(R.id.bucket_item_list_fragment_holder, fragmentList)
             .commit()
     }
+
+    override fun onResume() {
+        bucket_item_list.adapter?.notifyDataSetChanged()
+        super.onResume()
+    }
 }
