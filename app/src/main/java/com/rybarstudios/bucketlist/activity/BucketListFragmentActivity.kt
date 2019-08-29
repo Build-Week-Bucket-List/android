@@ -2,6 +2,7 @@ package com.rybarstudios.bucketlist.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.fragment.BucketItemAddButtonFragment
 import com.rybarstudios.bucketlist.fragment.BucketItemAddFragment
@@ -41,6 +42,9 @@ class BucketListFragmentActivity : AppCompatActivity(),
         item.indexId = BucketListItem.bucketListItem.size
         BucketListItem.bucketListItem.add(item)
         bucket_item_list.adapter?.notifyItemInserted(item.indexId)
+        if (item.indexId < 3) {
+            Toast.makeText(this, "Long press to delete the new item!", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
