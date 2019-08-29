@@ -1,5 +1,7 @@
 package com.rybarstudios.bucketlist.adapter
 
+import android.app.AlertDialog
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +19,7 @@ class JournalItemRecyclerViewAdapter(
 ) : RecyclerView.Adapter<JournalItemRecyclerViewAdapter.ViewHolder>() {
 
     private val journalTitle = data.journalEntryTitle
+    lateinit var context: Context
 
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
@@ -45,6 +48,7 @@ class JournalItemRecyclerViewAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val viewGroup =
             LayoutInflater.from(parent.context).inflate(R.layout.layout_journal_item, parent, false)
+        context = parent.context
         return ViewHolder(viewGroup)
 
     }
@@ -87,6 +91,29 @@ class JournalItemRecyclerViewAdapter(
         holder.journalCard.setOnClickListener {
             listener.onJournalFragmentInteraction(data, journalEntryIndex)
         }
+
+        holder.journalCard.setOnLongClickListener {
+
+            val builder = AlertDialog.Builder(context)
+
+            builder.setTitle("Delete Item")
+            builder.setMessage("Are you sure you want to delete this journal entry")
+            builder.setPositiveButton("YES"){ dialog, which ->
+                // Toast.makeText(context, "Image Deleted", Toast.LENGTH_SHORT).show()
+                journalTitle.removeAt(journalEntryIndex)
+                notifyDataSetChanged()
+            }
+
+            builder.setNegativeButton("No"){_, _ -> }
+
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+
+            true
+        }
+
+
+
 
     }
 
