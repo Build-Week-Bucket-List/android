@@ -97,18 +97,22 @@ class BucketItemRecyclerViewAdapter(
         //setting drawable based on completed value
         if (data[position].completed) {
             holder.image.setImageDrawable(checkImage)
+            (checkImage as Animatable).start()
         } else {
             holder.image.setImageDrawable(uncheckImage)
+            (uncheckImage as Animatable).start()
         }
 
         //listener to change animation when clicked
         holder.image.setOnClickListener {
             if (data[position].completed == true) { //this needs the == true or it won't keep the value when you leave and re-enter the activity, idk why
                 data[position].completed = false
+                BucketListItem.bucketListItem[position].completed = false
                 holder.image.setImageDrawable(uncheckImage)
                 (uncheckImage as Animatable).start()
             } else {
                 data[position].completed = true
+                BucketListItem.bucketListItem[position].completed = true
                 holder.image.setImageDrawable(checkImage)
                 (checkImage as Animatable).start()
             }
