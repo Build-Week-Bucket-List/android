@@ -19,7 +19,6 @@ class DetailFragmentActivity : AppCompatActivity(),
     JournalDetailFragment.OnJournalDetailFragmentInteractionListener,
     PhotoGalleryFragment.OnPhotoGalleryFragmentInteractionListener,
     JournalFragment.OnJournalFragmentInteractionListener,
-    ComboViewFragment.ComboViewOnFragmentInteractionListener,
     PhotoDetailFragment.OnPhotoDetailFragmentInteractionListener {
 
     companion object {
@@ -69,19 +68,6 @@ class DetailFragmentActivity : AppCompatActivity(),
 
     }
 
-    override fun onComboViewFragmentInteraction(item: BucketItem) {
-        val listItem = PhotoGalleryFragment()
-
-        val bundle = Bundle()
-        bundle.putSerializable(FRAGMENT_KEY, item)
-        listItem.arguments = bundle
-
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_holder, listItem)
-            .addToBackStack(null)
-            .commit()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_fragment)
@@ -119,9 +105,6 @@ class DetailFragmentActivity : AppCompatActivity(),
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
         var selectedFragment: Fragment? = null
         when (it.itemId) {
-            R.id.navigation_combo_view -> {
-                selectedFragment = ComboViewFragment()
-            }
             R.id.navigation_journal_entries -> {
                 selectedFragment = JournalFragment()
             }
