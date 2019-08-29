@@ -20,8 +20,8 @@
             <objectAnimator
                 android:propertyName="fillColor"
                 android:duration="300"
-                android:valueFrom="#000000"
-                android:valueTo="#6ec6ff"
+                android:valueFrom="#00ff7f"
+                android:valueTo="#000000"
                 android:valueType="colorType"
                 android:interpolator="@android:interpolator/fast_out_slow_in"/>
         </aapt:attr>
