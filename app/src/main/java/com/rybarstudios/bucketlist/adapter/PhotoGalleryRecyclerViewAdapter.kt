@@ -1,5 +1,7 @@
 package com.rybarstudios.bucketlist.adapter
 
+import android.app.AlertDialog
+import android.content.Context
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +19,7 @@ class PhotoGalleryRecyclerViewAdapter(
 ) : RecyclerView.Adapter<PhotoGalleryRecyclerViewAdapter.ViewHolder>() {
 
     private val imageUri = data.imageUri
+    lateinit var context: Context
 
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
@@ -45,6 +48,7 @@ class PhotoGalleryRecyclerViewAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val viewGroup =
             LayoutInflater.from(parent.context).inflate(R.layout.layout_photo_gallery_item, parent, false)
+        context = parent.context
         return ViewHolder(viewGroup)
 
     }
@@ -87,6 +91,26 @@ class PhotoGalleryRecyclerViewAdapter(
         // On Click Listener for that journal entry
         holder.imageCard.setOnClickListener {
             listener.onPhotoGalleryFragmentInteraction(data, photoIndex)
+        }
+
+        holder.imageCard.setOnLongClickListener {
+
+            val builder = AlertDialog.Builder(context)
+
+            builder.setTitle("Delete Image")
+            builder.setMessage("Are you sure you want to delete this image?")
+            builder.setPositiveButton("YES"){ dialog, which ->
+                // Toast.makeText(context, "Image Deleted", Toast.LENGTH_SHORT).show()
+                imageUri.removeAt(photoIndex)
+                notifyDataSetChanged()
+            }
+
+            builder.setNegativeButton("No"){_, _ -> }
+
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+
+            true
         }
 
     }
