@@ -1,8 +1,11 @@
 package com.rybarstudios.bucketlist.activity
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.rybarstudios.bucketlist.R
+import com.rybarstudios.bucketlist.adapter.BucketItemRecyclerViewAdapter.Companion.BUCKET_REQUEST_CODE
 import com.rybarstudios.bucketlist.fragment.BucketItemAddButtonFragment
 import com.rybarstudios.bucketlist.fragment.BucketItemAddFragment
 import com.rybarstudios.bucketlist.fragment.BucketItemListFragment
@@ -71,5 +74,13 @@ class BucketListFragmentActivity : AppCompatActivity(),
         supportFragmentManager.beginTransaction()
             .replace(R.id.bucket_item_list_fragment_holder, fragmentList)
             .commit()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == BUCKET_REQUEST_CODE && resultCode == Activity.RESULT_CANCELED){
+            
+        }
     }
 }

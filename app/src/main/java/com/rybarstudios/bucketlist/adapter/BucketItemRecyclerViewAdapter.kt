@@ -27,6 +27,10 @@ class BucketItemRecyclerViewAdapter(
 
     lateinit var context: Context
 
+    companion object{
+        const val BUCKET_REQUEST_CODE = 2
+    }
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.list_item_title
         val description: TextView = view.list_item_description
@@ -63,7 +67,7 @@ class BucketItemRecyclerViewAdapter(
         holder.itemCard.setOnClickListener {
             val detailIntent = Intent(context, DetailActivity::class.java)
             detailIntent.putExtra(DETAIL_INTENT_KEY, data[position])
-            (context as Activity).startActivity(detailIntent)
+            (context as Activity).startActivityForResult(detailIntent, BUCKET_REQUEST_CODE)
         }
 
         //declaring avd images

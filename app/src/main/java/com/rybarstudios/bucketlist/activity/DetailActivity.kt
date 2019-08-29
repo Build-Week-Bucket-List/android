@@ -48,7 +48,7 @@ class DetailActivity : AppCompatActivity() {
         }
 
         button_delete.setOnClickListener {
-
+            //finish figuring out how to delete bucketlist item here
             finish()
         }
     }
