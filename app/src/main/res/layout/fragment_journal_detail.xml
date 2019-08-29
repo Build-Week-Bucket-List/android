@@ -24,7 +24,7 @@
             android:singleLine="true"
             android:hint="Title" />
 
-        <com.rybarstudios.bucketlist.activity.JournalDetailCustomView
+        <com.rybarstudios.bucketlist.view.JournalDetailCustomView
             android:hint="Journal Entry"
             android:id="@+id/et_journal_entry"
             android:layout_width="match_parent"
