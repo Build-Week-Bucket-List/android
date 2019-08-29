@@ -13,22 +13,10 @@
 
     <FrameLayout
         android:id="@+id/detail_fragment_holder"
-        android:layout_margin="64dp"
+        android:layout_margin="32dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/nav_view"/>
-
-    <!--<FrameLayout
-        android:id="@+id/photo_gallery_fragment_holder"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/nav_view"/>
-
-    <FrameLayout
-        android:id="@+id/combo_view_fragment_holder"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/nav_view"/>-->
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
