@@ -13,6 +13,9 @@ import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY_2
 import com.rybarstudios.bucketlist.fragment.*
 import com.rybarstudios.bucketlist.model.BucketItem
+import com.rybarstudios.bucketlist.model.BucketListItem
+import kotlinx.android.synthetic.main.fragment_bucket_item_list.*
+import kotlinx.android.synthetic.main.fragment_journal.*
 import kotlinx.android.synthetic.main.fragment_photo_gallery.*
 
 class DetailFragmentActivity : AppCompatActivity(),
@@ -24,6 +27,7 @@ class DetailFragmentActivity : AppCompatActivity(),
 
     companion object {
         const val IMAGE_REQUEST_CODE = 9878
+        const val DETAIL_FRAGMENT_TAG = "9HASOPUDHF09U1QHFR"
     }
 
     private var bucketItemTop: BucketItem? = null
@@ -36,12 +40,12 @@ class DetailFragmentActivity : AppCompatActivity(),
         journalEntry.arguments = bundle
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.detail_fragment_holder, journalEntry)
+            .replace(R.id.detail_fragment_holder, journalEntry, DETAIL_FRAGMENT_TAG)
             .addToBackStack(null)
             .commit()
     }
 
-    override fun onJournalDetailFragmentInteraction(item: BucketItem) {
+    override fun onJournalDetailFragmentInteraction(item: BucketItem?) {
 
     }
 
@@ -82,6 +86,18 @@ class DetailFragmentActivity : AppCompatActivity(),
             .commit()
     }
 
+    override fun onBackPressed() {
+        val count = supportFragmentManager.backStackEntryCount
+        if (count != 0) {
+            val fragment =
+                supportFragmentManager.findFragmentByTag(DETAIL_FRAGMENT_TAG) as JournalDetailFragment
+            fragment.onBackButtonPressed()
+            journal_item_list.adapter?.notifyDataSetChanged()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_fragment)
@@ -97,7 +113,7 @@ class DetailFragmentActivity : AppCompatActivity(),
         //inflate journal list in onCreate
         val fragmentList = JournalFragment()
         val fragmentBundle = Bundle()
-        fragmentBundle.putSerializable(FRAGMENT_KEY, bucketItemTop)
+        fragmentBundle.putSerializable(FRAGMENT_KEY, BucketListItem.bucketListItem[bucketItem.indexId])
         fragmentList.arguments = fragmentBundle
 
         supportFragmentManager.beginTransaction()      //this just calls fragment manager, .beginTransaction starts builder process
@@ -110,7 +126,10 @@ class DetailFragmentActivity : AppCompatActivity(),
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             val photoUri: Uri? = data?.data
             if (photoUri != null) {
-                bucketItemTop?.imageUri?.add(photoUri.toString())
+
+                // Have to add to both the activity's bucketItemTop for bottom bar nav, as
+                // well as update the BucketListItem object
+                BucketListItem.bucketListItem[bucketItemTop!!.indexId].imageUri.add(photoUri.toString())
                 photo_gallery_detail_recycler_view.adapter?.notifyDataSetChanged()
             }
         }
@@ -131,7 +150,7 @@ class DetailFragmentActivity : AppCompatActivity(),
         }
         selectedFragment?.let { it1 ->
             val fragmentBundle = Bundle()
-            fragmentBundle.putSerializable(FRAGMENT_KEY, bucketItemTop)
+            fragmentBundle.putSerializable(FRAGMENT_KEY, BucketListItem.bucketListItem[bucketItemTop!!.indexId])
             selectedFragment.arguments = fragmentBundle
             supportFragmentManager.beginTransaction().replace(R.id.fragment_holder,
                 it1
