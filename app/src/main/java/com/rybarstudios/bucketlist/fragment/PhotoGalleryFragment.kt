@@ -1,16 +1,22 @@
 package com.rybarstudios.bucketlist.fragment
 
+import android.app.Activity.RESULT_OK
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import androidx.recyclerview.widget.GridLayoutManager
 
 import com.rybarstudios.bucketlist.R
-import kotlinx.android.synthetic.main.fragment_combo_view_detail.*
+import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity
+import com.rybarstudios.bucketlist.activity.DetailFragmentActivity.Companion.IMAGE_REQUEST_CODE
+import com.rybarstudios.bucketlist.adapter.PhotoGalleryRecyclerViewAdapter
+import com.rybarstudios.bucketlist.model.BucketItem
+import kotlinx.android.synthetic.main.fragment_photo_gallery.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,16 +26,18 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [ComboViewDetailFragment.OnFragmentInteractionListener] interface
+ * [PhotoGalleryDetailFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [ComboViewDetailFragment.newInstance] factory method to
+ * Use the [PhotoGalleryDetailFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ComboViewDetailFragment : Fragment() {
+class PhotoGalleryFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var listener: ComboViewOnFragmentInteractionListener? = null
+    private var listener: OnPhotoGalleryFragmentInteractionListener? = null
+
+    var item: BucketItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,33 +52,31 @@ class ComboViewDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_combo_view_detail, container, false)
+        return inflater.inflate(R.layout.fragment_photo_gallery, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        for (i in 0 until PhotoGalleryDetailFragment.imageList.size - 1) {
-            horizontal_scroll_view.addView(generateImageView(PhotoGalleryDetailFragment.imageList[i]), i)
+        val item = arguments?.getSerializable(BucketListFragmentActivity.FRAGMENT_KEY) as BucketItem
+
+        photo_gallery_detail_recycler_view.apply {
+            setHasFixedSize(true)
+            layoutManager = GridLayoutManager(context, 2)
+            adapter = PhotoGalleryRecyclerViewAdapter(item, listener!!)
         }
+        photo_gallery_detail_recycler_view.layoutManager?.generateDefaultLayoutParams()
 
-
-    }
-
-    private fun generateImageView(imageSrc: Uri) : ImageView {
-        val view = ImageView(context)
-        view.setImageURI(imageSrc)
-        return view
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onComboViewFragmentInteraction(uri)
+        photo_gallery_detail_floatingActionButton.setOnClickListener {
+            // Set the index integer to a random -# such that an if statement can be incorporated
+            // in order to execute an intent
+            listener?.onPhotoGalleryFragmentInteraction(item, -5346)
+        }
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is ComboViewOnFragmentInteractionListener) {
+        if (context is OnPhotoGalleryFragmentInteractionListener) {
             listener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
@@ -93,9 +99,8 @@ class ComboViewDetailFragment : Fragment() {
      * (http://developer.android.com/training/basics/fragments/communicating.html)
      * for more information.
      */
-    interface ComboViewOnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onComboViewFragmentInteraction(uri: Uri)
+    interface OnPhotoGalleryFragmentInteractionListener {
+        fun onPhotoGalleryFragmentInteraction(item: BucketItem, imageIndex: Int)
     }
 
     companion object {
@@ -105,12 +110,13 @@ class ComboViewDetailFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment ComboViewDetailFragment.
+         * @return A new instance of fragment PhotoGalleryDetailFragment.
          */
+
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            ComboViewDetailFragment().apply {
+            PhotoGalleryFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

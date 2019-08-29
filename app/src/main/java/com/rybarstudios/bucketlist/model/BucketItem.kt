@@ -1,11 +1,14 @@
 package com.rybarstudios.bucketlist.model
 
+import android.net.Uri
 import java.io.Serializable
 
 class BucketItem (
     var name: String,
     var description: String,
-    val JournalEntry: MutableList<String>,
+    var journalEntryTitle: MutableList<String>,
+    var journalEntry: MutableList<String>,
+    var imageUri: MutableList<String>,
     var completed: Boolean,
     var indexId: Int
 ) : Serializable

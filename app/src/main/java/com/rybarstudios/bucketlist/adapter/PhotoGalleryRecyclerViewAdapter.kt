@@ -1,22 +1,22 @@
 package com.rybarstudios.bucketlist.adapter
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.cardview.widget.CardView
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.rybarstudios.bucketlist.R
-import com.rybarstudios.bucketlist.fragment.JournalFragment
+import com.rybarstudios.bucketlist.fragment.PhotoGalleryFragment
 import com.rybarstudios.bucketlist.model.BucketItem
-import kotlinx.android.synthetic.main.layout_journal_item.view.*
+import kotlinx.android.synthetic.main.layout_photo_gallery_item.view.*
 
-class JournalItemRecyclerViewAdapter(
+class PhotoGalleryRecyclerViewAdapter(
     private val data: BucketItem,
-    private val listener: JournalFragment.OnJournalFragmentInteractionListener
-) : RecyclerView.Adapter<JournalItemRecyclerViewAdapter.ViewHolder>() {
+    private val listener: PhotoGalleryFragment.OnPhotoGalleryFragmentInteractionListener
+) : RecyclerView.Adapter<PhotoGalleryRecyclerViewAdapter.ViewHolder>() {
 
-    private val journalTitle = data.journalEntryTitle
+    private val imageUri = data.imageUri
 
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
@@ -44,7 +44,7 @@ class JournalItemRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val viewGroup =
-            LayoutInflater.from(parent.context).inflate(R.layout.layout_journal_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.layout_photo_gallery_item, parent, false)
         return ViewHolder(viewGroup)
 
     }
@@ -55,7 +55,7 @@ class JournalItemRecyclerViewAdapter(
      * @return The total number of items in this adapter.
      */
     override fun getItemCount(): Int {
-        return journalTitle.size
+        return imageUri.size
     }
 
     /**
@@ -79,19 +79,19 @@ class JournalItemRecyclerViewAdapter(
      * item at the given position in the data set.
      * @param position The position of the item within the adapter's data set.
      */
-    override fun onBindViewHolder(holder: ViewHolder, journalEntryIndex: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, photoIndex: Int) {
         // Set Journal CardView's name ET field
-        holder.name.text = journalTitle[journalEntryIndex]
+        val image = imageUri[photoIndex]
+        holder.imageCard.setImageURI(Uri.parse(image))
 
         // On Click Listener for that journal entry
-        holder.journalCard.setOnClickListener {
-            listener.onJournalFragmentInteraction(data, journalEntryIndex)
+        holder.imageCard.setOnClickListener {
+            listener.onPhotoGalleryFragmentInteraction(data, photoIndex)
         }
 
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val name: TextView = view.journal_entry_title
-        val journalCard: CardView = view.journal_parent_card
+        val imageCard: ImageView = view.recycler_view_photo_gallery_item
     }
 }

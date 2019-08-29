@@ -4,14 +4,12 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Animatable
-import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.rybarstudios.bucketlist.R
@@ -59,52 +57,35 @@ class BucketItemRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.name.text = data[position].name
         holder.description.text = data[position].description
+
+        //Starts DetailFragmentActivity when bucketListItem is clicked -- TC
         holder.itemCard.setOnClickListener {
-            /*if (listener != null) {
-                listener.onBucketItemListFragmentInteraction(data[position])
-            }*/
-
-            Toast.makeText(context, "${data[position].indexId}", Toast.LENGTH_SHORT).show()
-
-            //Starts DetailFragmentActivity when bucketListItem is clicked -- TC
-
             val detailIntent = Intent(context, DetailFragmentActivity::class.java)
             detailIntent.putExtra(DETAIL_INTENT_KEY, data[position])
-
             (context as Activity).startActivity(detailIntent)
-
         }
-
 
         //declaring avd images
         val checkImage = ContextCompat.getDrawable(context, R.drawable.check)
         val uncheckImage = ContextCompat.getDrawable(context, R.drawable.uncheck)
 
-
         //setting drawable based on completed value
-        if (data[position].completed == false) {
-
-            holder.image.setImageDrawable(uncheckImage)
-
-        } else {
+        if (data[position].completed) {
             holder.image.setImageDrawable(checkImage)
+        } else {
+            holder.image.setImageDrawable(uncheckImage)
         }
 
         //listener to change animation when clicked
         holder.image.setOnClickListener {
-
-            if (data[position].completed == false){
-
-                data[position].completed = true
-                holder.image.setImageDrawable(checkImage)
-                (checkImage as Animatable).start()
-
-            } else {
-
+            if (data[position].completed) {
                 data[position].completed = false
                 holder.image.setImageDrawable(uncheckImage)
                 (uncheckImage as Animatable).start()
-
+            } else {
+                data[position].completed = true
+                holder.image.setImageDrawable(checkImage)
+                (checkImage as Animatable).start()
             }
 
         }

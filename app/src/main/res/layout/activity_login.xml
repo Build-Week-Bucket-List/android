@@ -49,16 +49,20 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_login"
+        style="@style/CardViewCustom"
         android:layout_width="260dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="8dp"
-        app:cardBackgroundColor="@color/colorAccent"
-        app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_login_password">
+        <!--app:cardBackgroundColor="@color/colorAccent"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_login_password">-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
