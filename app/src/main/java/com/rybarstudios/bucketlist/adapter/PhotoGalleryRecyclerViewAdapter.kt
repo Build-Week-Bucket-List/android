@@ -1,5 +1,6 @@
 package com.rybarstudios.bucketlist.adapter
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -81,7 +82,7 @@ class PhotoGalleryRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, photoIndex: Int) {
         // Set Journal CardView's name ET field
         val image = imageUri[photoIndex]
-        holder.imageCard.setImageURI(image)
+        holder.imageCard.setImageURI(Uri.parse(image))
 
         // On Click Listener for that journal entry
         holder.imageCard.setOnClickListener {

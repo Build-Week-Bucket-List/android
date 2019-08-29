@@ -46,17 +46,23 @@ class DetailFragmentActivity : AppCompatActivity(),
     }
 
     override fun onPhotoGalleryFragmentInteraction(item: BucketItem, imageIndex: Int) {
-        val imageItem = PhotoDetailFragment()
+        if (imageIndex == -5346) {
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/*"
+            startActivityForResult(intent, IMAGE_REQUEST_CODE)
+        } else {
+            val imageItem = PhotoDetailFragment()
 
-        val bundle = Bundle()
-        bundle.putSerializable(FRAGMENT_KEY, item)
-        bundle.putSerializable(FRAGMENT_KEY_2, imageIndex)
-        imageItem.arguments = bundle
+            val bundle = Bundle()
+            bundle.putSerializable(FRAGMENT_KEY, item)
+            bundle.putSerializable(FRAGMENT_KEY_2, imageIndex)
+            imageItem.arguments = bundle
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.detail_fragment_holder, imageItem)
-            .addToBackStack(null)
-            .commit()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.detail_fragment_holder, imageItem)
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
     override fun onPhotoDetailFragmentInteraction(item: BucketItem, photoIndex: Int) {
@@ -91,7 +97,7 @@ class DetailFragmentActivity : AppCompatActivity(),
         //inflate journal list in onCreate
         val fragmentList = JournalFragment()
         val fragmentBundle = Bundle()
-        fragmentBundle.putSerializable(FRAGMENT_KEY, bucketItem)
+        fragmentBundle.putSerializable(FRAGMENT_KEY, bucketItemTop)
         fragmentList.arguments = fragmentBundle
 
         supportFragmentManager.beginTransaction()      //this just calls fragment manager, .beginTransaction starts builder process
@@ -104,8 +110,8 @@ class DetailFragmentActivity : AppCompatActivity(),
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             val photoUri: Uri? = data?.data
             if (photoUri != null) {
-                bucketItemTop!!.imageUri.add(photoUri)
-                photo_gallery_detail_recycler_view.adapter?.notifyItemInserted(bucketItemTop!!.imageUri.size)
+                bucketItemTop?.imageUri?.add(photoUri.toString())
+                photo_gallery_detail_recycler_view.adapter?.notifyDataSetChanged()
             }
         }
     }

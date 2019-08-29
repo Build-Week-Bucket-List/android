@@ -68,9 +68,9 @@ class PhotoGalleryFragment : Fragment() {
         photo_gallery_detail_recycler_view.layoutManager?.generateDefaultLayoutParams()
 
         photo_gallery_detail_floatingActionButton.setOnClickListener {
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
-            intent.type = "image/*"
-            startActivityForResult(intent, IMAGE_REQUEST_CODE)
+            // Set the index integer to a random -# such that an if statement can be incorporated
+            // in order to execute an intent
+            listener?.onPhotoGalleryFragmentInteraction(item, -5346)
         }
     }
 

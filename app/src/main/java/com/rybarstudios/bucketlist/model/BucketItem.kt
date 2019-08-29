@@ -8,7 +8,7 @@ class BucketItem (
     var description: String,
     var journalEntryTitle: MutableList<String>,
     var journalEntry: MutableList<String>,
-    var imageUri: MutableList<Uri>,
+    var imageUri: MutableList<String>,
     var completed: Boolean,
     var indexId: Int
 ) : Serializable
