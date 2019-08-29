@@ -72,19 +72,6 @@ class DetailFragmentActivity : AppCompatActivity(),
 
     }
 
-    override fun onComboViewFragmentInteraction(item: BucketItem) {
-        val listItem = PhotoGalleryFragment()
-
-        val bundle = Bundle()
-        bundle.putSerializable(FRAGMENT_KEY, item)
-        listItem.arguments = bundle
-
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_holder, listItem)
-            .addToBackStack(null)
-            .commit()
-    }
-
     override fun onBackPressed() {
         val count = supportFragmentManager.backStackEntryCount
         if (count != 0) {
