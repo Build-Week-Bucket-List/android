@@ -1,7 +1,6 @@
 package com.rybarstudios.bucketlist.adapter
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Animatable
@@ -11,12 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.DETAIL_INTENT_KEY
-import com.rybarstudios.bucketlist.activity.DetailActivity
 import com.rybarstudios.bucketlist.activity.DetailFragmentActivity
 import com.rybarstudios.bucketlist.fragment.BucketItemListFragment
 import com.rybarstudios.bucketlist.model.BucketItem
@@ -63,29 +60,9 @@ class BucketItemRecyclerViewAdapter(
 
         //Starts DetailFragmentActivity when bucketListItem is clicked -- TC
         holder.itemCard.setOnClickListener {
-            val detailIntent = Intent(context, DetailActivity::class.java)
+            val detailIntent = Intent(context, DetailFragmentActivity::class.java)
             detailIntent.putExtra(DETAIL_INTENT_KEY, data[position])
             (context as Activity).startActivity(detailIntent)
-        }
-
-        holder.itemCard.setOnLongClickListener {
-
-            val builder = AlertDialog.Builder(context)
-
-            builder.setTitle("Delete Item")
-            builder.setMessage("Are you sure you want to delete this Bucket List Item?")
-            builder.setPositiveButton("YES"){ dialog, which ->
-               // Toast.makeText(context, "Image Deleted", Toast.LENGTH_SHORT).show()
-                data.removeAt(position)
-                notifyDataSetChanged()
-            }
-
-            builder.setNegativeButton("No"){_, _ -> }
-
-            val dialog: AlertDialog = builder.create()
-            dialog.show()
-
-            true
         }
 
         //declaring avd images

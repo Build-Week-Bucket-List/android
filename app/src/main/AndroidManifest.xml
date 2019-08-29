@@ -12,21 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.JournalActivity"></activity>
-        <activity android:name=".activity.DetailActivity" />
         <activity
             android:name=".activity.FullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_fullscreen"
-            android:theme="@style/FullscreenTheme" />
+            android:theme="@style/FullscreenTheme"/>
         <activity
             android:name=".activity.DetailFragmentActivity"
-            android:label="@string/title_activity_detail_fragment"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".activity.BucketListFragmentActivity"
-            android:label="@string/title_activity_bucket_list_fragment"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:label="@string/title_activity_detail_fragment" />
+        <activity android:name=".activity.BucketListFragmentActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:label="@string/title_activity_bucket_list_fragment"/>
         <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
