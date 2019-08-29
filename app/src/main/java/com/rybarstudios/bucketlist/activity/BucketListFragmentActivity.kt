@@ -1,8 +1,12 @@
 package com.rybarstudios.bucketlist.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.fragment.BucketItemAddButtonFragment
 import com.rybarstudios.bucketlist.fragment.BucketItemAddFragment
@@ -75,5 +79,43 @@ class BucketListFragmentActivity : AppCompatActivity(),
         supportFragmentManager.beginTransaction()
             .replace(R.id.bucket_item_list_fragment_holder, fragmentList)
             .commit()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        super.onCreateOptionsMenu(menu)
+        menuInflater.inflate(R.menu.share_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.share_bucket_item_list) {
+            showInfo()
+        }
+        return true
+    }
+
+    private fun showInfo() {
+        val dialogTitle = "Share bucket item list"
+        val dialogMessage = "Are you sure you want to share your list?"
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(dialogTitle)
+            .setMessage(dialogMessage)
+            .setPositiveButton("Yes") {dialog, which ->
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.putExtra(Intent.EXTRA_TEXT, getBucketListItems())
+                intent.type = "text/plain"
+                startActivity(intent)
+            }
+            .setNegativeButton("No") {_, _ -> }
+            .create()
+            .show()
+    }
+
+    private fun getBucketListItems() : String {
+        var bucketListItems = "My bucket list: "
+        for (i in 0 until BucketListItem.bucketListItem.size) {
+            bucketListItems += BucketListItem.bucketListItem[i].name + ", "
+        }
+        return bucketListItems
     }
 }
