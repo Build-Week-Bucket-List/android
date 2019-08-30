@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.fragment.JournalFragment
 import com.rybarstudios.bucketlist.model.BucketItem
+import com.rybarstudios.bucketlist.model.BucketListItem
 import kotlinx.android.synthetic.main.layout_journal_item.view.*
 
 class JournalItemRecyclerViewAdapter(
@@ -100,7 +101,8 @@ class JournalItemRecyclerViewAdapter(
             builder.setMessage("Are you sure you want to delete this journal entry")
             builder.setPositiveButton("YES"){ dialog, which ->
                 // Toast.makeText(context, "Image Deleted", Toast.LENGTH_SHORT).show()
-                journalTitle.removeAt(journalEntryIndex)
+                BucketListItem.bucketListItem[data.indexId].journalEntryTitle.removeAt(journalEntryIndex)
+                BucketListItem.bucketListItem[data.indexId].journalEntry.removeAt(journalEntryIndex)
                 notifyDataSetChanged()
             }
 
@@ -111,10 +113,6 @@ class JournalItemRecyclerViewAdapter(
 
             true
         }
-
-
-
-
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
