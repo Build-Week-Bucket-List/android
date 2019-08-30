@@ -88,11 +88,6 @@ class PhotoGalleryRecyclerViewAdapter(
         val image = imageUri[photoIndex]
         holder.imageCard.setImageURI(Uri.parse(image))
 
-        // On Click Listener for that journal entry
-        holder.imageCard.setOnClickListener {
-            listener.onPhotoGalleryFragmentInteraction(data, photoIndex)
-        }
-
         holder.imageCard.setOnLongClickListener {
 
             val builder = AlertDialog.Builder(context)

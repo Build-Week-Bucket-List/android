@@ -20,13 +20,11 @@ import kotlinx.android.synthetic.main.fragment_photo_gallery.*
 class DetailFragmentActivity : AppCompatActivity(),
     JournalDetailFragment.OnJournalDetailFragmentInteractionListener,
     PhotoGalleryFragment.OnPhotoGalleryFragmentInteractionListener,
-    JournalFragment.OnJournalFragmentInteractionListener,
-    PhotoDetailFragment.OnPhotoDetailFragmentInteractionListener {
+    JournalFragment.OnJournalFragmentInteractionListener {
 
     companion object {
         const val IMAGE_REQUEST_CODE = 9878
         const val DETAIL_FRAGMENT_TAG = "9HASOPUDHF09U1QHFR"
-        const val FRAGMENT_TAG = "9UHF018HPUIH0FQPA9SHF"
     }
 
     private var bucketItemTop: BucketItem? = null
@@ -53,23 +51,7 @@ class DetailFragmentActivity : AppCompatActivity(),
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
             startActivityForResult(intent, IMAGE_REQUEST_CODE)
-        } else {
-            val imageItem = PhotoDetailFragment()
-
-            val bundle = Bundle()
-            bundle.putSerializable(FRAGMENT_KEY, item)
-            bundle.putSerializable(FRAGMENT_KEY_2, imageIndex)
-            imageItem.arguments = bundle
-
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.detail_fragment_holder, imageItem)
-                .addToBackStack(null)
-                .commit()
         }
-    }
-
-    override fun onPhotoDetailFragmentInteraction(item: BucketItem, photoIndex: Int) {
-
     }
 
     override fun onBackPressed() {
@@ -112,7 +94,6 @@ class DetailFragmentActivity : AppCompatActivity(),
         bucketItemTop = bucketItem
 
         val bottomNavigation: BottomNavigationView? = findViewById(R.id.nav_view)
-        bottomNavigation?.setOnNavigationItemReselectedListener(mOnNavigationItemReselectedListener)
         bottomNavigation?.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         //inflate journal list in onCreate
@@ -144,30 +125,6 @@ class DetailFragmentActivity : AppCompatActivity(),
         }
     }
 
-    private val mOnNavigationItemReselectedListener =
-        BottomNavigationView.OnNavigationItemReselectedListener {
-        var selectedFragment: Fragment? = null
-        when (it.itemId) {
-            R.id.navigation_photo_gallery -> {
-                checkForEditedBucketItemTitle()
-                checkForEditedBucketItemDescription()
-                selectedFragment = PhotoGalleryFragment()
-            }
-        }
-            selectedFragment?.let { it1 ->
-                val fragmentBundle = Bundle()
-                fragmentBundle.putSerializable(
-                    FRAGMENT_KEY,
-                    BucketListItem.bucketListItem[bucketItemTop!!.indexId]
-                )
-                selectedFragment.arguments = fragmentBundle
-                supportFragmentManager.beginTransaction().replace(
-                    R.id.fragment_holder,
-                    it1
-                ).commit()
-            }
-        }
-
     private val mOnNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener {
             var selectedFragment: Fragment? = null
@@ -176,8 +133,6 @@ class DetailFragmentActivity : AppCompatActivity(),
                     selectedFragment = JournalFragment()
                 }
                 R.id.navigation_photo_gallery -> {
-                    checkForEditedBucketItemTitle()
-                    checkForEditedBucketItemDescription()
                     selectedFragment = PhotoGalleryFragment()
                 }
             }
