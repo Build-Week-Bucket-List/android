@@ -85,6 +85,7 @@ class BucketListFragmentActivity : AppCompatActivity(),
     override fun onResume() {
         bucket_item_list.adapter?.notifyDataSetChanged()
         super.onResume()
+    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         super.onCreateOptionsMenu(menu)
