@@ -1,44 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/CardViewCustom"
     android:id="@+id/cardview_bucketlistitem"
+    style="@style/CardViewCustom"
+    android:layout_width="match_parent"
+    android:layout_height="96dp"
     android:orientation="horizontal">
 
     <LinearLayout
-        android:id="@+id/linear_layout_parent"
-        android:orientation="vertical"
+        android:background="@color/hintOfWhite"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/list_item_title"
-            android:layout_width="215dp"
+        <LinearLayout
+            android:layout_marginStart="8dp"
+            android:id="@+id/linear_layout_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:text="TEST TITLE"
-            android:textSize="20dp" />
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/list_item_description"
-            android:layout_width="250dp"
-            android:textSize="12sp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:text="TEST DESCRIPTION DESCRIPTION DESCRIPTION" />
+            <TextView
+                android:id="@+id/list_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/straightBlack"
+                android:text="Test Title"
+                android:textSize="32sp" />
+
+            <TextView
+                android:id="@+id/list_item_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/straightBlack"
+                android:text="Test Description, Test Description, Test Description"
+                android:textAllCaps="false"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/checkmark"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="8dp"
+            android:layout_gravity="center"
+            android:src="@drawable/check" />
 
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/checkmark"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="end"
-        android:layout_margin="8dp"
-        android:src="@drawable/check" />
 
 
 </androidx.cardview.widget.CardView>

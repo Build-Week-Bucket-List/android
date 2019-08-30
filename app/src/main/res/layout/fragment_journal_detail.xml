@@ -1,35 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/journal_detail_fragment_holder"
+    android:background="@color/popUpBackground"
+    style="@style/CardViewPopUp"
+    app:cardCornerRadius="24dp"
+    android:elevation="12dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/secondaryLightColor"
+    android:layout_margin="16dp"
     tools:context=".fragment.JournalDetailFragment">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <EditText
             android:id="@+id/et_journal_title"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="Title"
+            android:textColorHint="@color/hintTextColor"
             android:singleLine="true"
-            android:hint="Title" />
+            android:textAlignment="center" />
 
         <com.rybarstudios.bucketlist.view.JournalDetailCustomView
-            android:hint="Journal Entry"
             android:id="@+id/et_journal_entry"
+            android:textColorHint="@color/hintTextColor"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:hint="Journal Entry" />
 
     </LinearLayout>
 
-</FrameLayout>
+</androidx.cardview.widget.CardView>

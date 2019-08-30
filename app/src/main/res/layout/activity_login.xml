@@ -49,7 +49,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_login"
-        app:cardBackgroundColor="@color/colorPrimaryDark"
+        app:cardBackgroundColor="@color/primaryColor"
         android:layout_width="260dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"

@@ -73,7 +73,6 @@ class JournalDetailFragment : Fragment() {
         // EditText fields
         if (item.journalEntryTitle[journalEntryIndex] != "New Entry") {
             (context as Activity).et_journal_title.setText(item.journalEntryTitle[journalEntryIndex])
-            openSoftKeyboard(context, et_journal_entry)
         } else {
             openSoftKeyboard(context, et_journal_title)
         }
