@@ -81,6 +81,11 @@ class BucketListFragmentActivity : AppCompatActivity(),
             .commit()
     }
 
+
+    override fun onResume() {
+        bucket_item_list.adapter?.notifyDataSetChanged()
+        super.onResume()
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         super.onCreateOptionsMenu(menu)
         menuInflater.inflate(R.menu.share_menu, menu)
@@ -117,5 +122,6 @@ class BucketListFragmentActivity : AppCompatActivity(),
             bucketListItems += BucketListItem.bucketListItem[i].name + ", "
         }
         return bucketListItems
+
     }
 }
