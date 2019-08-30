@@ -61,39 +61,27 @@ class BucketListFragmentActivity : AppCompatActivity(),
             // Pre-populated dummy data to show off functionality
             BucketListItem.bucketListItem.add(
                 BucketItem(
-                    "HODL Bitcoin",
-                    "#StackSats until I die",
+                    "WELCOME!",
+                    "Click here to explore!",
                     mutableListOf(
-                        "Use @bisq_network"
+                        "Deleting Journal Entries",
+                        "DELETE ME!",
+                        "Saving Journal Entries",
+                        "Deleting Bucket List Items"
                     ),
                     mutableListOf(
-                        "Use Bisq to avoid Know Your Customer/Anti-Money Laundering (KYC/AML) which are" +
-                                " invasive and destroy your financial privacy.\n\nThe legacy financial system" +
-                                " relies on surveillance, but has been taken over by the advertisement" +
-                                " industry and is now bought and shared between companies.\n\nNip it in the" +
-                                " bud by using cash, and acquiring Bitcoin via Bisq where you share as" +
-                                " little information as is needed."
+                        "Long pressing the journal card on the previous screen" +
+                                " will prompt you to delete that entry!",
+                        "Please delete me already...",
+                        "Simply hitting the back button of this detail view" +
+                                " will always save your content!\n\nTry it out by" +
+                                " adding something below!",
+                        "Long pressing the Bucket List Item card will prompt you" +
+                                " to delete the item!"
                     ),
                     ArrayList(),
                     false,
                     0
-                )
-            )
-            BucketListItem.bucketListItem.add(
-                BucketItem(
-                    "Hyperbitcoinization",
-                    "Live long enough to see it happen by eating healthy (The Carnivore Diet)",
-                    mutableListOf(
-                        "Hyperbitcoinization?",
-                        "Carnivore Diet?"
-                    ),
-                    mutableListOf(
-                        "Magic internet money (Bitcoin) deprecates that dirty Fiat money",
-                        "Eat Meat, nothing else."
-                    ),
-                    ArrayList(),
-                    false,
-                    1
                 )
             )
         }
