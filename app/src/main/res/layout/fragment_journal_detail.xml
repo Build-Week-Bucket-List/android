@@ -4,7 +4,7 @@
     android:id="@+id/journal_detail_fragment_holder"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/secondaryLightColor"
     tools:context=".fragment.JournalDetailFragment">
 
     <LinearLayout
