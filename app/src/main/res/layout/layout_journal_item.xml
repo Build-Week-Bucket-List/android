@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/journal_parent_card"
+    style="@style/CardViewCustom"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="48dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:background="@color/hintOfWhite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/journal_entry_title"
+            android:layout_width="match_parent"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/straightBlack"
+            android:layout_height="match_parent"
+            android:text="Test"
+            android:textSize="24sp" />
+
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

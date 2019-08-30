@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="200dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
     android:layout_marginStart="32dp"
     android:layout_marginEnd="32dp"
+    app:cardCornerRadius="24dp"
+    android:elevation="12dp"
     android:id="@+id/bucket_item_add_fragment"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/popUpBackground"
     tools:context=".fragment.BucketItemAddFragment">
 
     <LinearLayout
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="18dp"
@@ -21,21 +25,22 @@
             android:id="@+id/et_bucket_list_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Bucket List Title"
+            android:hint="Title"
             android:singleLine="true"
             android:textAlignment="center"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white" />
+            android:textColor="@color/straightBlack"
+            android:textColorHint="@color/hintTextColor" />
 
         <EditText
             android:id="@+id/et_bucket_list_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Description"
+            android:singleLine="true"
             android:textAlignment="center"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white" />
+            android:textColor="@color/straightBlack"
+            android:textColorHint="@color/hintTextColor" />
 
     </LinearLayout>
 
-</FrameLayout>
+</androidx.cardview.widget.CardView>

@@ -5,18 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
-    android:background="@color/colorPrimaryDark"
     tools:context=".fragment.BucketItemAddButtonFragment">
 
     <Button
+        style="@style/ButtonStyles"
         android:id="@+id/btn_add_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:text="add"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
+        android:text="Add Bucket List Item"
         android:textSize="18sp" />
 
 </FrameLayout>

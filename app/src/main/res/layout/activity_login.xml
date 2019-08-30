@@ -8,12 +8,12 @@
 
     <ImageView
         android:id="@+id/login_image_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="155dp"
+        android:layout_height="136dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="8dp"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/bucketlogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,12 +49,12 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_login"
+        app:cardBackgroundColor="@color/primaryColor"
         android:layout_width="260dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="8dp"
-        app:cardBackgroundColor="@color/colorAccent"
         app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

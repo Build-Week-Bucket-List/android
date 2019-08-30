@@ -29,7 +29,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  *
  */
-class BucketListItemFragment : Fragment() {
+class BucketItemListFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -65,7 +65,7 @@ class BucketListItemFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        BucketListItem.bucketListItem.add(BucketItem("machu pichu", "visit machu pichu", false, 0))
+
 
         bucket_item_list.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)

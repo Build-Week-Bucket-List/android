@@ -51,8 +51,8 @@ class BucketItemAddButtonFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         btn_add_item.setOnClickListener {
-            Toast.makeText(context, "Add Bucket List Item", Toast.LENGTH_SHORT).show()
-            listener?.onBucketItemAddButtonFragmentInteraction(BucketItem("", "", false, 0))
+            // Send blank data to the BucketItemAddFragment listener
+            listener?.onBucketItemAddButtonFragmentInteraction(BucketItem("", "", mutableListOf(), mutableListOf(), mutableListOf(), false, 0))
         }
     }
 
