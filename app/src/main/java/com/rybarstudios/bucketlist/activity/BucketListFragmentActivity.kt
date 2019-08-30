@@ -55,19 +55,44 @@ class BucketListFragmentActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bucket_list_fragment)
 
-        BucketListItem.bucketListItem.add(BucketItem("machu pichu", "visit machu pichu", mutableListOf("one","two","three"), mutableListOf("asdfasdf", "ASDFASDFA", "2457274572574"), ArrayList(), false, 0))
-        BucketListItem.bucketListItem.add(BucketItem("Marathon", "Run a full maraton", mutableListOf("one","two","three"), mutableListOf("asdfasdf", "ASDFASDFA", "2457274572574"), ArrayList(), false, 1))
-        BucketListItem.bucketListItem.add(BucketItem("Skydiving", "Do a high altitude skydive", mutableListOf("one","two","three"), mutableListOf("asdfasdf", "ASDFASDFA", "2457274572574"), ArrayList(), false, 2))
-        BucketListItem.bucketListItem.add(BucketItem("Giza Pyramids", "See the Great Pyramids of Giza", mutableListOf("one","two","three"), mutableListOf("asdfasdf", "ASDFASDFA", "2457274572574"), ArrayList(), false, 3))
-        BucketListItem.bucketListItem.add(BucketItem("Alligator", "Wrestle an alligator to establish dominance", mutableListOf("one","two","three"), mutableListOf("asdfasdf", "ASDFASDFA", "2457274572574"), ArrayList(), false, 4))
-        BucketListItem.bucketListItem.add(BucketItem("President", "Meet the President of the United States", mutableListOf("one","two","three"), mutableListOf("asdfasdf", "ASDFASDFA", "2457274572574"), ArrayList(), false, 5))
-        BucketListItem.bucketListItem.add(BucketItem("Mike Tyson", "Knock Out Mike Tyson IRL", mutableListOf("one","two","three"), mutableListOf("asdfasdf", "ASDFASDFA", "2457274572574"), ArrayList(), false, 6))
-        BucketListItem.bucketListItem.add(BucketItem("Go-Kart", "Hire a bunch of actors to dress up as mario characters and go go-karting", mutableListOf("one","two","three"), mutableListOf("asdfasdf", "ASDFASDFA", "2457274572574"), ArrayList(), false, 7))
-        BucketListItem.bucketListItem.add(BucketItem("RATM", "Rage Against The Machine with Rage Against The Machine", mutableListOf("one","two","three"), mutableListOf("asdfasdf", "ASDFASDFA", "2457274572574"), ArrayList(), false, 8))
-        BucketListItem.bucketListItem.add(BucketItem("7 Continents", "Travel to all 7 continents", mutableListOf("one","two","three"), mutableListOf("asdfasdf", "ASDFASDFA", "2457274572574"), ArrayList(), false, 9))
-        BucketListItem.bucketListItem.add(BucketItem("Appalachain Trail", "Hike the entire appalachain trail", mutableListOf("one","two","three"), mutableListOf("asdfasdf", "ASDFASDFA", "2457274572574"), ArrayList(), false, 10))
-        BucketListItem.bucketListItem.add(BucketItem("Tornado", "See a tornado", mutableListOf("one","two","three"), mutableListOf("asdfasdf", "ASDFASDFA", "2457274572574"), ArrayList(), false, 11))
-        BucketListItem.bucketListItem.add(BucketItem("Hurrican", "Fly into a hurricane with the NHS Hurrican Chasers", mutableListOf("one","two","three"), mutableListOf("asdfasdf", "ASDFASDFA", "2457274572574"), ArrayList(), false, 12))
+        // Pre-populated dummy data to show functionality
+        BucketListItem.bucketListItem.add(
+            BucketItem(
+                "HODL Bitcoin",
+                "#StackSats until I die",
+                mutableListOf(
+                    "Use @bisq_network"
+                ),
+                mutableListOf(
+                    "Use Bisq to avoid Know Your Customer/Anti-Money Laundering (KYC/AML) which are" +
+                            " invasive and destroy your financial privacy.\n\nThe legacy financial system" +
+                            " relies on surveillance, but has been taken over by the advertisement" +
+                            " industry and is now bought and shared between companies.\n\nNip it in the" +
+                            " bud by using cash, and acquiring Bitcoin via Bisq where you share as" +
+                            " little information as is needed."
+                ),
+                ArrayList(),
+                false,
+                0
+            )
+        )
+        BucketListItem.bucketListItem.add(
+            BucketItem(
+                "Hyperbitcoinization",
+                "Live long enough to see it happen by eating healthy (The Carnivore Diet)",
+                mutableListOf(
+                    "Hyperbitcoinization?",
+                    "Carnivore Diet?"
+                ),
+                mutableListOf(
+                    "Magic internet money (Bitcoin) deprecates that dirty Fiat money",
+                    "Eat Meat, nothing else."
+                ),
+                ArrayList(),
+                false,
+                1
+            )
+        )
 
         // Inflate activity_bucket_list_fragment FrameLayout(s) with the fragments
         val fragmentButton = BucketItemAddButtonFragment()
@@ -106,18 +131,18 @@ class BucketListFragmentActivity : AppCompatActivity(),
         val builder = AlertDialog.Builder(this)
         builder.setTitle(dialogTitle)
             .setMessage(dialogMessage)
-            .setPositiveButton("Yes") {dialog, which ->
+            .setPositiveButton("Yes") { dialog, which ->
                 val intent = Intent(Intent.ACTION_SEND)
                 intent.putExtra(Intent.EXTRA_TEXT, getBucketListItems())
                 intent.type = "text/plain"
                 startActivity(intent)
             }
-            .setNegativeButton("No") {_, _ -> }
+            .setNegativeButton("No") { _, _ -> }
             .create()
             .show()
     }
 
-    private fun getBucketListItems() : String {
+    private fun getBucketListItems(): String {
         var bucketListItems = "My bucket list: "
         for (i in 0 until BucketListItem.bucketListItem.size) {
             bucketListItems += BucketListItem.bucketListItem[i].name + ", "
