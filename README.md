@@ -6,3 +6,9 @@ Pitch: We've all seen the "bucket list family" and some of us potentially grow g
 MVP: As a user I want to log in to my bucket list so I can see the items on my list in a grid format. As a user I want to be able to create a bucket list item. As a user I want to be able to share my bucket list with other users (family members) so that they can add items to it as well. As I user I want to be able to click an item so that I can mark it as done, add photos, journal entries.
 
 Stretch: Add a system into the user platform such that it would allow a user to create "family members" out of users linking users together in a social network. Add a system that allows users to share their done bucket list items on social media.
+
+#### Features
+1. Add and delete bucket list items.
+2. Check-off completed bucket list items.
+3. Add journal entries and photos to your bucket list item.
+4. Share full bucket list as a plain text file.
