@@ -55,44 +55,48 @@ class BucketListFragmentActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bucket_list_fragment)
 
-        // Pre-populated dummy data to show functionality
-        BucketListItem.bucketListItem.add(
-            BucketItem(
-                "HODL Bitcoin",
-                "#StackSats until I die",
-                mutableListOf(
-                    "Use @bisq_network"
-                ),
-                mutableListOf(
-                    "Use Bisq to avoid Know Your Customer/Anti-Money Laundering (KYC/AML) which are" +
-                            " invasive and destroy your financial privacy.\n\nThe legacy financial system" +
-                            " relies on surveillance, but has been taken over by the advertisement" +
-                            " industry and is now bought and shared between companies.\n\nNip it in the" +
-                            " bud by using cash, and acquiring Bitcoin via Bisq where you share as" +
-                            " little information as is needed."
-                ),
-                ArrayList(),
-                false,
-                0
+        // If the data hasn't been loaded before when going from LoginActivity to
+        // BucketListFragmentActivity
+        if (BucketListItem.bucketListItem.size < 1) {
+            // Pre-populated dummy data to show off functionality
+            BucketListItem.bucketListItem.add(
+                BucketItem(
+                    "HODL Bitcoin",
+                    "#StackSats until I die",
+                    mutableListOf(
+                        "Use @bisq_network"
+                    ),
+                    mutableListOf(
+                        "Use Bisq to avoid Know Your Customer/Anti-Money Laundering (KYC/AML) which are" +
+                                " invasive and destroy your financial privacy.\n\nThe legacy financial system" +
+                                " relies on surveillance, but has been taken over by the advertisement" +
+                                " industry and is now bought and shared between companies.\n\nNip it in the" +
+                                " bud by using cash, and acquiring Bitcoin via Bisq where you share as" +
+                                " little information as is needed."
+                    ),
+                    ArrayList(),
+                    false,
+                    0
+                )
             )
-        )
-        BucketListItem.bucketListItem.add(
-            BucketItem(
-                "Hyperbitcoinization",
-                "Live long enough to see it happen by eating healthy (The Carnivore Diet)",
-                mutableListOf(
-                    "Hyperbitcoinization?",
-                    "Carnivore Diet?"
-                ),
-                mutableListOf(
-                    "Magic internet money (Bitcoin) deprecates that dirty Fiat money",
-                    "Eat Meat, nothing else."
-                ),
-                ArrayList(),
-                false,
-                1
+            BucketListItem.bucketListItem.add(
+                BucketItem(
+                    "Hyperbitcoinization",
+                    "Live long enough to see it happen by eating healthy (The Carnivore Diet)",
+                    mutableListOf(
+                        "Hyperbitcoinization?",
+                        "Carnivore Diet?"
+                    ),
+                    mutableListOf(
+                        "Magic internet money (Bitcoin) deprecates that dirty Fiat money",
+                        "Eat Meat, nothing else."
+                    ),
+                    ArrayList(),
+                    false,
+                    1
+                )
             )
-        )
+        }
 
         // Inflate activity_bucket_list_fragment FrameLayout(s) with the fragments
         val fragmentButton = BucketItemAddButtonFragment()
