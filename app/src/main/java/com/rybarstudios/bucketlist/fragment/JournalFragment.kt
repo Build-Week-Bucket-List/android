@@ -12,6 +12,7 @@ import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion.FRAGMENT_KEY
 import com.rybarstudios.bucketlist.adapter.JournalItemRecyclerViewAdapter
 import com.rybarstudios.bucketlist.model.BucketItem
+import com.rybarstudios.bucketlist.model.BucketListItem
 import kotlinx.android.synthetic.main.fragment_journal.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -57,6 +58,11 @@ class JournalFragment : Fragment() {
 
         bucket_list_item_name.setText(item.name)
         bucket_list_item_description.setText(item.description)
+
+        button_save_changes.setOnClickListener {
+            BucketListItem.bucketListItem[item.indexId].name = bucket_list_item_name.text.toString()
+            BucketListItem.bucketListItem[item.indexId].description = bucket_list_item_description.text.toString()
+        }
 
         journal_item_list.apply {
             setHasFixedSize(true)
