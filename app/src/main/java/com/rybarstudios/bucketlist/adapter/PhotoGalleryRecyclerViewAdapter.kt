@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rybarstudios.bucketlist.R
 import com.rybarstudios.bucketlist.fragment.PhotoGalleryFragment
 import com.rybarstudios.bucketlist.model.BucketItem
+import com.rybarstudios.bucketlist.model.PhotoHashMap
 import kotlinx.android.synthetic.main.layout_photo_gallery_item.view.*
 
 class PhotoGalleryRecyclerViewAdapter(
@@ -85,8 +86,9 @@ class PhotoGalleryRecyclerViewAdapter(
      */
     override fun onBindViewHolder(holder: ViewHolder, photoIndex: Int) {
         // Set Journal CardView's name ET field
-        val image = imageUri[photoIndex]
-        holder.imageCard.setImageURI(Uri.parse(image))
+        val hashKey = imageUri[photoIndex]
+        val bitmapHashMap = PhotoHashMap.photoHashMap.get(hashKey)
+        holder.imageCard.setImageBitmap(bitmapHashMap)
 
         holder.imageCard.setOnLongClickListener {
 
@@ -95,8 +97,8 @@ class PhotoGalleryRecyclerViewAdapter(
             builder.setTitle("Delete Image")
             builder.setMessage("Are you sure you want to delete this image?")
             builder.setPositiveButton("YES"){ dialog, which ->
-                // Toast.makeText(context, "Image Deleted", Toast.LENGTH_SHORT).show()
                 imageUri.removeAt(photoIndex)
+                PhotoHashMap.photoHashMap.remove(imageUri[photoIndex])
                 notifyDataSetChanged()
             }
 
