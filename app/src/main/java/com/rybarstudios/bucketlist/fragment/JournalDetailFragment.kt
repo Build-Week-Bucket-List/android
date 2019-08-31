@@ -88,7 +88,6 @@ class JournalDetailFragment : Fragment() {
                 .journalEntryTitle[entryIndex!!] = et_journal_title.text.toString()
             BucketListItem.bucketListItem[bucketItem!!.indexId]
                 .journalEntry[entryIndex!!] = et_journal_entry.text.toString()
-            //journal_item_list.adapter?.notifyDataSetChanged()
         }
         // remove the fragment from view and popBackStack
         activity?.supportFragmentManager?.beginTransaction()
