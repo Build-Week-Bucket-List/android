@@ -2,8 +2,12 @@ package com.rybarstudios.bucketlist.activity
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.provider.MediaStore.Images.Thumbnails.getThumbnail
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -14,8 +18,12 @@ import com.rybarstudios.bucketlist.activity.BucketListFragmentActivity.Companion
 import com.rybarstudios.bucketlist.fragment.*
 import com.rybarstudios.bucketlist.model.BucketItem
 import com.rybarstudios.bucketlist.model.BucketListItem
+import com.rybarstudios.bucketlist.model.PhotoHashMap
 import kotlinx.android.synthetic.main.fragment_journal.*
 import kotlinx.android.synthetic.main.fragment_photo_gallery.*
+import java.io.FileNotFoundException
+import java.io.IOException
+import java.io.InputStream
 
 class DetailFragmentActivity : AppCompatActivity(),
     JournalDetailFragment.OnJournalDetailFragmentInteractionListener,
@@ -115,15 +123,66 @@ class DetailFragmentActivity : AppCompatActivity(),
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             val photoUri: Uri? = data?.data
-            if (photoUri != null) {
+            val bitmapImage = MediaStore.Images.Media.getBitmap(this.contentResolver, photoUri)
+            if (photoUri != null && bitmapImage != null) {
 
-                // Have to add to both the activity's bucketItemTop for bottom bar nav, as
-                // well as update the BucketListItem object
+                // Make a new HashMap value, load the content into it, and then add it to
+                PhotoHashMap.photoHashMap.put(photoUri.toString(), bitmapImage)
+                //PhotoHashMap.photoHashMap.add(hashMap)
+
                 BucketListItem.bucketListItem[bucketItemTop!!.indexId].imageUri.add(photoUri.toString())
+
+                // Load the new image into view
                 photo_gallery_detail_recycler_view.adapter?.notifyDataSetChanged()
             }
         }
     }
+/*
+    // https://stackoverflow.com/questions/3879992/how-to-get-bitmap-from-an-uri/6228188#6228188
+    @Throws(FileNotFoundException::class, IOException::class)
+    private fun getThumbnail(uri: Uri?): Bitmap? {
+        if (uri != null) {
+            var input = this.contentResolver.openInputStream(uri)
+
+            val onlyBoundsOptions = BitmapFactory.Options()
+            onlyBoundsOptions.inJustDecodeBounds = true
+            onlyBoundsOptions.inDither = true
+            onlyBoundsOptions.inPreferredConfig = Bitmap.Config.ARGB_8888
+            BitmapFactory.decodeStream(input, null, onlyBoundsOptions)
+            input?.close()
+
+            if (onlyBoundsOptions.outWidth == -1 || onlyBoundsOptions.outHeight == -1) {
+                return null
+            }
+
+            val originalSize =
+                if (onlyBoundsOptions.outHeight > onlyBoundsOptions.outWidth) onlyBoundsOptions.outHeight else onlyBoundsOptions.outWidth
+
+            val thumbnailSize =
+
+            val ratio = if (originalSize > THUMBNAIL_SIZE) originalSize / THUMBNAIL_SIZE else 1.0
+
+            val bitmapOptions = BitmapFactory.Options()
+            bitmapOptions.inSampleSize = getPowerOfTwoForSampleRatio(ratio)
+            bitmapOptions.inDither = true
+            bitmapOptions.inPreferredConfig = Bitmap.Config.ARGB_8888
+            input = this.contentResolver.openInputStream(uri)
+            val bitmap = BitmapFactory.decodeStream(input, null, bitmapOptions)
+            input?.close()
+            return bitmap
+        }
+        return null
+    }
+
+    // https://stackoverflow.com/questions/3879992/how-to-get-bitmap-from-an-uri/6228188#6228188
+    private fun getPowerOfTwoForSampleRatio(ratio: Double): Int {
+        val k = Integer.highestOneBit(Math.floor(ratio).toInt())
+        return if (k == 0)
+            1
+        else
+            k
+    }
+*/
 
     private val mOnNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener {
