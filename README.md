@@ -12,3 +12,8 @@ Stretch: Add a system into the user platform such that it would allow a user to 
 2. Check-off completed bucket list items.
 3. Add journal entries and photos to your bucket list item.
 4. Share full bucket list as a plain text file.
+
+### Contributors
+[Tyler Clawson](https://github.com/tjclawson)
+[Matthew Nelson](https://github.com/05nelsonm)
+[Christian Rybarczyk](https://github.com/Christian-Rybarczyk)
